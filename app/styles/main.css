@@ -88,10 +88,6 @@ body {
   }
 }
 
-.navbar.header-index{
-  margin-bottom : 0px;
-  border-radius: 0px;
-}
 
 .container.principal-view{
   width : 100%;
@@ -108,9 +104,6 @@ body {
   font-size : 11px;
 } 
 
-.chartElement a{
-  display: none;
-}
 
 .principal-container{
   width : 100%;
