@@ -86,7 +86,7 @@ $scope.amChartOptions = {
   valueField: "percent",
   outlineColor: "#FFFFFF",
   outlineAlpha: 0.8,
-  outlineThickness: 2,
+  outlineThickness: 5,
   colorField: "color",
   pulledField: "pulled",
   titles: [{
