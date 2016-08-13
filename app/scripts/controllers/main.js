@@ -8,7 +8,7 @@
  * Controller of the histoTennisApp
  */
 angular.module('histoTennisApp')
-  .controller('MainCtrl', function ($scope) {
+  .controller('MainCtrl', function ($scope, $http) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
@@ -19,6 +19,8 @@ angular.module('histoTennisApp')
 var chart;
 var legend;
 var selected;
+
+$scope.testJsonData = "noOK"
 
 
  var types = [{
@@ -105,6 +107,13 @@ $scope.amChartOptions = {
     }
   }]
 } 
+
+ $scope.testJson = function(){
+  $http.get('http://localhost:8888/histoTennisBack/api/json').
+        success(function(data) {
+            $scope.testJsonData = data;
+        });
+}
 
 
   });
