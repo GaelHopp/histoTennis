@@ -1,14 +1,10 @@
 <div>
   
   <div class="col-xs-6 col-md-6" style="height: 500px;">
-        <am-chart id="myFirstChart" class="chartElement" options="amChartOptions"></am-chart>
+        <am-chart id="totalVictories" class="chartElement" options="amChartOptionsTotalVictories"></am-chart>
   </div>
 
-  <div class="col-xs-6 col-md-6" style="height: 500px;">
-        <am-chart id="myFirstChart2" class="chartElement" options="amChartOptions"></am-chart>
-  </div>
-
-  <button ng-click="testJson()">OK</button>
-    <p>The button has been clicked {{testJsonData}} times.</p>
+  <button ng-click="generateTotalVictoriesData()">OK</button>
+    <p>The button has been clicked {{amChartOptions}} times.</p>
 
 </div>

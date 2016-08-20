@@ -16,12 +16,46 @@ angular.module('histoTennisApp')
     ];
   
 
-var chart;
-var legend;
-var selected;
 
-$scope.testJsonData = "noOK"
+$scope.amChartOptionsTotalVictories = generateTotalVictoriesData();
 
+function constructTypesForTotalVictories(){
+
+var types = [{
+  type: "Fossil Energy",
+  percent: 70,
+  color: "#ff9e01",
+  subs: [{
+    type: "Oil",
+    percent: 15
+  }, {
+    type: "Coal",
+    percent: 35
+  }, {
+    type: "Nuclear",
+    percent: 20
+  }]
+}, {
+  type: "Green Energy",
+  percent: 30,
+  color: "#b0de09",
+  subs: [{
+    type: "Hydro",
+    percent: 15
+  }, {
+    type: "Wind",
+    percent: 10
+  }, {
+    type: "Other",
+    percent: 5
+  }]
+}];
+
+return types;
+
+}
+
+function generateTotalVictoriesData(){
 
  var types = [{
   type: "Fossil Energy",
@@ -53,8 +87,17 @@ $scope.testJsonData = "noOK"
   }]
 }];
 
+var selected;
+var title = "Matches";
+return generateChartOptions(constructTypesForTotalVictories(), title);
 
- function generateChartData() {
+  }
+
+
+$scope.testJsonData = "noOK";
+
+
+ function generateChartData(types, selected) {
   var chartData = [];
   for (var i = 0; i < types.length; i++) {
     if (i == selected) {
@@ -78,10 +121,13 @@ $scope.testJsonData = "noOK"
   return chartData;
 }
 
+function generateChartOptions(datas, title){ 
 
-$scope.amChartOptions = {
+var selected;
+
+var amChartOptions = {
   type: "pie",
-  data: generateChartData(),
+  data: generateChartData(datas, selected),
   labelText: "[[title]]: [[value]]",
   balloonText: "[[title]]: [[value]]",
   titleField: "type",
@@ -92,21 +138,29 @@ $scope.amChartOptions = {
   colorField: "color",
   pulledField: "pulled",
   titles: [{
-    text: "Click a slice to see the details"
+    text: title
   }],"listeners": [{
     "event": "clickSlice",
     "method": function(event) {
       var chart = event.chart;
+      console.log("FLAG1 "+event.dataItem.dataContext.id);
       if (event.dataItem.dataContext.id != undefined) {
         selected = event.dataItem.dataContext.id;
+        console.log("boucle1");
       } else {
         selected = undefined;
+        console.log("boucle2");
       }
-      chart.dataProvider = generateChartData();
+      console.log("FLAG2 "+event.dataItem.dataContext.id);
+      chart.dataProvider = generateChartData(datas, selected);
       chart.validateData();
     }
   }]
 } 
+
+return amChartOptions;
+
+}
 
  $scope.testJson = function(){
   $http.get('http://localhost:8888/histoTennisBack/api/json').
