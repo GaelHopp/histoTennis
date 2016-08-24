@@ -8,7 +8,7 @@
  * Controller of the histoTennisApp
  */
 angular.module('histoTennisApp')
-  .controller('MainCtrl', function ($scope, $http, $q) {
+  .controller('MainCtrl', function ($scope, $http, $q, matchService) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
@@ -22,9 +22,6 @@ Generate function to generate datas with sub types
 
 $scope.generateChartDataForPie = function(types, selected) {
   var chartData = [];
-  
-  console.log("aaaa"+types);
-
   for (var i = 0; i < types.length; i++) {
     if (i == selected) {
       for (var x = 0; x < types[i].subs.length; x++) {
@@ -32,6 +29,7 @@ $scope.generateChartDataForPie = function(types, selected) {
           type: types[i].subs[x].type,
           percent: types[i].subs[x].percent,
           color: types[i].color,
+          percentToDisplay : types[i].subs[x].percentToDisplay,
           pulled: true
         });
       }
@@ -40,10 +38,12 @@ $scope.generateChartDataForPie = function(types, selected) {
         type: types[i].type,
         percent: types[i].percent,
         color: types[i].color,
+        percentToDisplay: types[i].percentToDisplay,
         id: i
       });
     }
   }
+
   return chartData;
 }
 
@@ -63,43 +63,8 @@ Construct JSon datas with good format for total victories
 
 $scope.constructTypesForTotalVictories = function(){
 
-var deferred = $q.defer();
-
-
-
-var types = [{
-  type: "Fossil Energy",
-  percent: 70,
-  color: "#ff9e01",
-  subs: [{
-    type: "Oil",
-    percent: 15
-  }, {
-    type: "Coal",
-    percent: 35
-  }, {
-    type: "Nuclear",
-    percent: 20
-  }]
-}, {
-  type: "Green Energy",
-  percent: 30,
-  color: "#b0de09",
-  subs: [{
-    type: "Hydro",
-    percent: 15
-  }, {
-    type: "Wind",
-    percent: 10
-  }, {
-    type: "Other",
-    percent: 5
-  }]
-}];
-
-
-deferred.resolve(types);
-return deferred.promise;
+  var variable = matchService.constructMatchesForTotalVictories();
+return variable;
 
 
 }
@@ -120,7 +85,6 @@ $scope.datasTotalVictories = $scope.constructTypesForTotalVictories();
 
 
 
-
 /*
 Generic function to generate datas for pie chart
 */
@@ -131,11 +95,12 @@ var selected;
 
 var amChartOptions = {
   type: "pie",
-  labelText: "[[title]]: [[value]]",
-  balloonText: "[[title]]: [[value]]",
+  labelText: "[[title]]: [[description]]%",
+  balloonText: "[[title]]: [[description]]%",
   titleField: "type",
   valueField: "percent",
-  categoryField: "f",
+  categoryField: "percentToDisplay",
+  descriptionField: "percentToDisplay",
   outlineColor: "#FFFFFF",
   outlineAlpha: 0.8,
   outlineThickness: 5,
@@ -156,7 +121,6 @@ var amChartOptions = {
       console.log(selected);
       $scope.datasTotalVictories.then(function(value) {
         chart.dataProvider = $scope.generateChartDataForPie(value, selected);
-        console.log(chart.dataProvider);
         chart.validateData();
       });
 
@@ -166,11 +130,12 @@ var amChartOptions = {
   }]
 } 
 
-$scope.datasTotalVictories.then(function(value){
+return $scope.datasTotalVictories.then(function(value){
   amChartOptions.data = $scope.generateChartDataForPie(value, selected);
+  return amChartOptions;
 });
 
-return amChartOptions;
+
 
 }
 
@@ -191,12 +156,7 @@ $scope.amChartOptionsTotalVictories = $scope.generateChartOptionsForPie("Victoir
 
 
 
- $scope.testJson = function(){
-  $http.get('http://localhost:8888/histoTennisBack/api/json').
-        success(function(data) {
-            $scope.testJsonData = data;
-        });
-}
+
 
 
   });
