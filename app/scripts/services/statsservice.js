@@ -67,8 +67,6 @@ angular.module('histoTennisApp')
     	stats.push(statsPlayer1);
     	stats.push(statsPlayer2);
 
-    	console.log(stats);
-
     	return stats;
 
     }
