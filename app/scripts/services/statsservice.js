@@ -152,6 +152,97 @@ angular.module('histoTennisApp')
     }
 
 
+    this.generateSuperTieBreakPercentage = function(matches, player1, player2){
+
+        var stats = []
+        var statsMatchesWithSB = {}
+        var statsMatchesWithoutSB = {}
+
+        var countMatchWithSB = 0;
+        var countMatchWithSBWonByPlayer1 = 0;
+        var countMatchWithSBWonByPlayer2 = 0;
+
+        var countMatchWithoutSBWonByPlayer1 = 0;
+        var countMatchWithoutSBWonByPlayer2 = 0;
+
+        
+
+        for(var i = 0; i < matches.length; i++){
+            var isMatchWithSB = false;
+            for(var j = 0; j < matches[i].sets.length; j++){
+                if(matches[i].sets[j].superTieBreak == "1"){
+                    countMatchWithSB++;
+                    isMatchWithSB = true;
+                    if(matches[i].idWinner == player1.idPlayer)
+                        countMatchWithSBWonByPlayer1++;
+                    else if(matches[i].idWinner == player2.idPlayer)
+                        countMatchWithSBWonByPlayer2++;
+                    
+                }
+                    
+            }
+            if(!isMatchWithSB){
+                 if(matches[i].idWinner == player1.idPlayer)
+                        countMatchWithoutSBWonByPlayer1++;
+                    else if(matches[i].idWinner == player2.idPlayer)
+                        countMatchWithoutSBWonByPlayer2++;
+            }
+
+                
+        }
+
+        statsMatchesWithSB.type = "Matches avec SB";
+        statsMatchesWithSB.percent = this.roundTo2decimals(countMatchWithSB*100/matches.length);
+        statsMatchesWithSB.percentToDisplay = this.roundTo2decimals(countMatchWithSB*100/matches.length);
+
+        var statsMatchWithSBPlayer1Victories = {}
+        statsMatchWithSBPlayer1Victories.percent = this.roundTo2decimals(countMatchWithSBWonByPlayer1*100/matches.length);
+        statsMatchWithSBPlayer1Victories.percentToDisplay = this.roundTo2decimals(countMatchWithSBWonByPlayer1*100/countMatchWithSB);
+        
+        var statsMatchWithSBPlayer2Victories = {}
+        statsMatchWithSBPlayer2Victories.percent = this.roundTo2decimals(countMatchWithSBWonByPlayer2*100/matches.length);
+        statsMatchWithSBPlayer2Victories.percentToDisplay = this.roundTo2decimals(countMatchWithSBWonByPlayer2*100/countMatchWithSB);
+
+        var statsPlayersWithSB = [];
+        statsPlayersWithSB.push(statsMatchWithSBPlayer1Victories);
+        statsPlayersWithSB.push(statsMatchWithSBPlayer2Victories);
+
+        statsMatchesWithSB.statsPlayer = statsPlayersWithSB;
+
+        statsMatchesWithoutSB.type = "Matches sans SB";
+        statsMatchesWithoutSB.percent = this.roundTo2decimals(100 - (countMatchWithSB*100/matches.length));
+        statsMatchesWithoutSB.percent = this.roundTo2decimals(100 - (countMatchWithSB*100/matches.length));
+
+        var statsMatchWithoutSBPlayer1Victories = {}
+        statsMatchWithoutSBPlayer1Victories.percent = this.roundTo2decimals(countMatchWithoutSBWonByPlayer1*100/matches.length);
+        statsMatchWithoutSBPlayer1Victories.percentToDisplay = this.roundTo2decimals(countMatchWithoutSBWonByPlayer1*100/(matches.length - countMatchWithSB));
+        
+        var statsMatchWithoutSBPlayer2Victories = {}
+        statsMatchWithoutSBPlayer2Victories.percent = this.roundTo2decimals(countMatchWithoutSBWonByPlayer2*100/matches.length);
+        statsMatchWithoutSBPlayer2Victories.percentToDisplay = this.roundTo2decimals(countMatchWithoutSBWonByPlayer2*100/(matches.length - countMatchWithSB));
+
+        var statsPlayersWithoutSB = [];
+        statsPlayersWithoutSB.push(statsMatchWithoutSBPlayer1Victories);
+        statsPlayersWithoutSB.push(statsMatchWithoutSBPlayer2Victories);
+
+        statsMatchesWithoutSB.statsPlayer = statsPlayersWithoutSB;
+
+        stats.push(statsMatchesWithSB);
+        stats.push(statsMatchesWithoutSB);
+
+        console.log(stats);       
+        return stats;
+
+    }
+
+
+/*
+
+################## UTILS FUNCTIONS #######################
+
+*/
+
+
     this.roundTo2decimals = function(value){
     	return +(Math.round(value + "e+2") + "e-2");
     }
