@@ -230,7 +230,7 @@ angular.module('histoTennisApp')
         stats.push(statsMatchesWithSB);
         stats.push(statsMatchesWithoutSB);
 
-        console.log(stats);       
+        
         return stats;
 
     }

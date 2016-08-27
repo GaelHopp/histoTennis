@@ -93,7 +93,7 @@ angular.module('histoTennisApp')
   				types.push(type);
   			}
 
-  			console.log(types);
+  		
   			return $q.when(types);
 
   		});
@@ -104,7 +104,7 @@ angular.module('histoTennisApp')
   			
   			var matches = values.matches.data;
   			var players = values.players.data;
-  			console.log(matches);
+  			
 
   			var stats = statsService.generateSuperTieBreakPercentage(matches, players[0], players[1]);
   			var types = [];
@@ -131,7 +131,7 @@ angular.module('histoTennisApp')
   				types.push(type);
   			}
 
-  			console.log(types);
+  			
   			return $q.when(types);
 
   		});
