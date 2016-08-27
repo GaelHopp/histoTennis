@@ -49,47 +49,12 @@ $scope.generateChartDataForPie = function(types, selected) {
 
 
 
-/*
-
-#################################### CONSTRUCT DATAS ##################################
-
-*/
-
-
-
-/*
-Construct JSon datas with good format for total victories
-*/
-
-$scope.constructTypesForTotalVictories = function(){
-
-  var variable = matchService.constructMatchesForTotalVictories();
-return variable;
-
-
-}
-
-
-/*
-
-#################################### GET PROMISES AND CONSTRUCT DATAS ##################################
-
-*/
-
-$scope.datasTotalVictories = $scope.constructTypesForTotalVictories();
-
-
-
-
-
-
-
 
 /*
 Generic function to generate datas for pie chart
 */
 
-$scope.generateChartOptionsForPie = function(title){ 
+$scope.generateChartOptionsForPie = function(title, datas){ 
 
 var selected;
 
@@ -117,7 +82,7 @@ var amChartOptions = {
       } else {
         selected = undefined;
       }
-      $scope.datasTotalVictories.then(function(value) {
+      datas.then(function(value) {
         chart.dataProvider = $scope.generateChartDataForPie(value, selected);
         chart.validateData();
       });
@@ -128,7 +93,7 @@ var amChartOptions = {
   }]
 } 
 
-return $scope.datasTotalVictories.then(function(value){
+return datas.then(function(value){
   amChartOptions.data = $scope.generateChartDataForPie(value, selected);
   return amChartOptions;
 });
@@ -148,7 +113,8 @@ return $scope.datasTotalVictories.then(function(value){
 
 */
 
-$scope.amChartOptionsTotalVictories = $scope.generateChartOptionsForPie("Victoires totales"); // datas for total victories
+$scope.amChartOptionsTotalVictories = $scope.generateChartOptionsForPie("Victoires totales", matchService.constructMatchesForTotalVictories()); // datas for total victories
+//$scope.amChartOptionsInOutVictories = $scope.generateChartOptionsForPie("Victoires IN/OUT"); // datas for IN/OUT victories
 
 
 
