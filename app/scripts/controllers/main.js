@@ -102,8 +102,8 @@ var amChartOptions = {
   categoryField: "percentToDisplay",
   descriptionField: "percentToDisplay",
   outlineColor: "#FFFFFF",
-  outlineAlpha: 0.8,
-  outlineThickness: 5,
+  outlineAlpha: 0.7,
+  outlineThickness: 3,
   colorField: "color",
   pulledField: "pulled",
   titles: [{
@@ -117,8 +117,6 @@ var amChartOptions = {
       } else {
         selected = undefined;
       }
-
-      console.log(selected);
       $scope.datasTotalVictories.then(function(value) {
         chart.dataProvider = $scope.generateChartDataForPie(value, selected);
         chart.validateData();

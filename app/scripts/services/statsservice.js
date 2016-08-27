@@ -9,17 +9,19 @@
  */
 angular.module('histoTennisApp')
   .service('statsService', function () {
+
     
     this.generateVictoriesPercentage = function(matches, player1, player2){
+
+    	var stats = [];
+    	var statsPlayer1 = {'id' : player1.idPlayer}
+    	var statsPlayer2 = {'id' : player2.idPlayer}
 
     	var countVictoriesPlayer1 = 0;
     	var countVictoriesPlayer2 = 0;
 
     	var countVictoriesPlayer1In2Sets = 0;
     	var countVictoriesPlayer2In2Sets = 0;
-
-
-    	var victoriesDatas = [];
 
     	for(var i = 0; i < matches.length; i++){
     		var match = matches[i];
@@ -35,73 +37,39 @@ angular.module('histoTennisApp')
     				countVictoriesPlayer2In2Sets++;
     		}
     			
-
     	}
 
-    	var victoriesPlayer1Percentage = this.roundTo2decimals((countVictoriesPlayer1*100)/(countVictoriesPlayer1+countVictoriesPlayer2));
+    	var statsPlayer1Victories = this.roundTo2decimals((countVictoriesPlayer1*100)/(countVictoriesPlayer1+countVictoriesPlayer2));
+    	statsPlayer1.victories = statsPlayer1Victories;
+
+    	statsPlayer1.victories2Sets = {} 
+    	statsPlayer1.victories3Sets = {} 
+    	statsPlayer2.victories2Sets = {} 
+    	statsPlayer2.victories3Sets = {}
+
+    	var statsPlayer1Victories2Sets = this.roundTo2decimals(countVictoriesPlayer1In2Sets*100/(countVictoriesPlayer1+countVictoriesPlayer2));
+    	statsPlayer1.victories2Sets.real = statsPlayer1Victories2Sets;
+    	statsPlayer1.victories2Sets.displayed = this.roundTo2decimals(countVictoriesPlayer1In2Sets*100/(countVictoriesPlayer1));
+
+    	statsPlayer1.victories3Sets.real = this.roundTo2decimals(statsPlayer1Victories - statsPlayer1Victories2Sets);
+    	statsPlayer1.victories3Sets.displayed = this.roundTo2decimals(100-statsPlayer1.victories2Sets.displayed);
     	
-    	var victoriesPlayer1In2SetsPercentage = this.roundTo2decimals(countVictoriesPlayer1In2Sets*100/(countVictoriesPlayer1+countVictoriesPlayer2));
-    	var victoriesPlayer1In3SetsPercentage = this.roundTo2decimals(victoriesPlayer1Percentage - victoriesPlayer1In2SetsPercentage);
-    	var victoriesPlayer1In2SetsPercentageInOwnVictories = this.roundTo2decimals(countVictoriesPlayer1In2Sets*100/countVictoriesPlayer1);
-    	var victoriesPlayer1In3SetsPercentageInOwnVictories = this.roundTo2decimals(100 - victoriesPlayer1In2SetsPercentageInOwnVictories);
+    	var statsPlayer2Victories = this.roundTo2decimals((countVictoriesPlayer2*100)/(countVictoriesPlayer1+countVictoriesPlayer2));
+    	statsPlayer2.victories = statsPlayer2Victories;
 
-    	var victoriesPlayer2Percentage = this.roundTo2decimals((countVictoriesPlayer2*100)/(countVictoriesPlayer1+countVictoriesPlayer2));
+    	var statsPlayer2Victories2Sets = this.roundTo2decimals(countVictoriesPlayer2In2Sets*100/(countVictoriesPlayer2+countVictoriesPlayer1));
+    	statsPlayer2.victories2Sets.real = statsPlayer2Victories2Sets;
+    	statsPlayer2.victories2Sets.displayed = this.roundTo2decimals(countVictoriesPlayer2In2Sets*100/(countVictoriesPlayer2));
+
+    	statsPlayer2.victories3Sets.real = this.roundTo2decimals(statsPlayer2Victories - statsPlayer2Victories2Sets);
+    	statsPlayer2.victories3Sets.displayed = this.roundTo2decimals(100-statsPlayer2.victories2Sets.displayed);
     	
-    	var victoriesPlayer2In2SetsPercentage = this.roundTo2decimals(countVictoriesPlayer2In2Sets*100/(countVictoriesPlayer2+countVictoriesPlayer1));
-    	var victoriesPlayer2In3SetsPercentage = this.roundTo2decimals(victoriesPlayer2Percentage - victoriesPlayer2In2SetsPercentage);
-    	var victoriesPlayer2In2SetsPercentageInOwnVictories = this.roundTo2decimals(countVictoriesPlayer2In2Sets*100/countVictoriesPlayer2);
-    	var victoriesPlayer2In3SetsPercentageInOwnVictories = this.roundTo2decimals(100 - victoriesPlayer2In2SetsPercentageInOwnVictories);
+    	stats.push(statsPlayer1);
+    	stats.push(statsPlayer2);
 
-    	var victoriesPlayer1 = {}
-    	victoriesPlayer1.type = player1.firstName + " " + player1.lastName;
-    	victoriesPlayer1.percent = victoriesPlayer1Percentage;
-    	victoriesPlayer1.percentToDisplay = victoriesPlayer1Percentage;
-    	victoriesPlayer1.color = "#ff9e01";
+    	console.log(stats);
 
-
-    	var splitVictoriesPlayer1 = [];
-    	var victoriesIn2SetsPlayer1 = {}
-    	victoriesIn2SetsPlayer1.type = "2 sets";
-    	victoriesIn2SetsPlayer1.percent = victoriesPlayer1In2SetsPercentage;
-    	victoriesIn2SetsPlayer1.percentToDisplay = victoriesPlayer1In2SetsPercentageInOwnVictories;
-
-    	var victoriesIn3SetsPlayer1 = {}
-    	victoriesIn3SetsPlayer1.type = "3 sets";
-    	victoriesIn3SetsPlayer1.percent = victoriesPlayer1In3SetsPercentage;
-    	victoriesIn3SetsPlayer1.percentToDisplay = victoriesPlayer1In3SetsPercentageInOwnVictories;
-
-    	splitVictoriesPlayer1.push(victoriesIn2SetsPlayer1);
-    	splitVictoriesPlayer1.push(victoriesIn3SetsPlayer1);
-    	victoriesPlayer1.subs = splitVictoriesPlayer1;
-
-
-    	var victoriesPlayer2 = {}
-    	victoriesPlayer2.type = player2.firstName + " " + player2.lastName;
-    	victoriesPlayer2.percent = victoriesPlayer2Percentage;
-    	victoriesPlayer2.percentToDisplay = victoriesPlayer2Percentage;
-    	victoriesPlayer2.color = "#b0de09";
-
-    	var splitVictoriesPlayer2 = [];
-    	var victoriesIn2SetsPlayer2 = {}
-    	victoriesIn2SetsPlayer2.type = "2 sets";
-    	victoriesIn2SetsPlayer2.percent = victoriesPlayer2In2SetsPercentage;
-    	victoriesIn2SetsPlayer2.percentToDisplay = victoriesPlayer2In2SetsPercentageInOwnVictories;
-    	
-    	var victoriesIn3SetsPlayer2 = {}
-    	victoriesIn3SetsPlayer2.type = "3 sets";
-    	victoriesIn3SetsPlayer2.percent = victoriesPlayer2In3SetsPercentage;
-    	victoriesIn3SetsPlayer2.percentToDisplay = victoriesPlayer2In3SetsPercentageInOwnVictories;
-
-    	splitVictoriesPlayer2.push(victoriesIn2SetsPlayer2);
-    	splitVictoriesPlayer2.push(victoriesIn3SetsPlayer2);
-    	victoriesPlayer2.subs = splitVictoriesPlayer2;
-
-
-
-    	victoriesDatas.push(victoriesPlayer1);
-    	victoriesDatas.push(victoriesPlayer2);
-
-    	return victoriesDatas;
+    	return stats;
 
     }
 
