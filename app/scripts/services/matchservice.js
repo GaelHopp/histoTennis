@@ -17,6 +17,12 @@ angular.module('histoTennisApp')
 
   	var colorsPie = ["#41b5fb", "#3889e5"];
 
+
+/*
+
+######### CONSTRUCT MATCHES FOR TOTAL VICTORIES ##########
+
+*/
   	this.constructMatchesForTotalVictories = function(){
   		return $q.all(promises).then(function(values){
   			
@@ -53,5 +59,84 @@ angular.module('histoTennisApp')
 
   		});
   	}
+
+
+  	this.constructMatchesForTotalVictories = function(){
+  		return $q.all(promises).then(function(values){
+  			
+  			var matches = values.matches.data;
+  			var players = values.players.data;
+
+  			var stats = statsService.generateVictoriesPercentage(matches, players[0], players[1]);
+  			var types = [];
+
+  			for(var i = 0; i < stats.length; i++){
+  				var type = {}
+  				type.type = players[i].firstName + " " + players[i].lastName;
+  				type.percent = stats[i].victories;
+  				type.percentToDisplay = stats[i].victories;
+  				type.color = colorsPie[i]
+  				type.subs = [];
+  				var subType2Sets = {'type' : '2 sets', 
+  									'percent' : stats[i].victories2Sets.real, 
+  									'percentToDisplay' : stats[i].victories2Sets.displayed, 
+  									'color' : colorsPie[i]}
+  				var subType3Sets = {'type' : '3 sets', 
+  									'percent' : stats[i].victories3Sets.real, 
+  									'percentToDisplay' : stats[i].victories3Sets.displayed, 
+  									'color' : colorsPie[i]}
+  				
+  				type.subs.push(subType2Sets);
+  				type.subs.push(subType3Sets);
+
+  				types.push(type);
+  			}
+
+  			console.log(types);
+  			return $q.when(types);
+
+  		});
+  	}
+
+  	this.constructMatchesForInOutVictories = function(){
+  		return $q.all(promises).then(function(values){
+  			
+  			var matches = values.matches.data;
+  			var players = values.players.data;
+
+  			console.log(matches);
+
+  			var stats = statsService.generateInOutPercentageWithVictories(matches, players[0], players[1]);
+  			var types = [];
+
+  			for(var i = 0; i < stats.length; i++){
+  				var type = {}
+  				type.type = stats[i].type;
+  				type.percent = stats[i].percent;
+  				type.percentToDisplay = stats[i].percent;
+  				type.color = colorsPie[i]
+  				type.subs = [];
+  				var subTypePlayer1 = {'type' : players[0].firstName + " " + players[0].lastName, 
+  									'percent' : stats[i].statsPlayer[0].percent, 
+  									'percentToDisplay' : stats[i].statsPlayer[0].percentToDisplay, 
+  									'color' : colorsPie[i]}
+  				var subTypePlayer2 = {'type' : players[1].firstName + " " + players[1].lastName, 
+  									'percent' : stats[i].statsPlayer[1].percent, 
+  									'percentToDisplay' : stats[i].statsPlayer[1].percentToDisplay, 
+  									'color' : colorsPie[i]}
+  				
+  				type.subs.push(subTypePlayer1);
+  				type.subs.push(subTypePlayer2);
+
+  				types.push(type);
+  			}
+
+  			console.log(types);
+  			return $q.when(types);
+
+  		});
+  	}
+
+
 
   });
