@@ -54,57 +54,19 @@ angular.module('histoTennisApp')
   				types.push(type);
   			}
 
-  			console.log(types);
+  		
   			return $q.when(types);
 
   		});
   	}
 
 
-  	this.constructMatchesForTotalVictories = function(){
-  		return $q.all(promises).then(function(values){
-  			
-  			var matches = values.matches.data;
-  			var players = values.players.data;
-
-  			var stats = statsService.generateVictoriesPercentage(matches, players[0], players[1]);
-  			var types = [];
-
-  			for(var i = 0; i < stats.length; i++){
-  				var type = {}
-  				type.type = players[i].firstName + " " + players[i].lastName;
-  				type.percent = stats[i].victories;
-  				type.percentToDisplay = stats[i].victories;
-  				type.color = colorsPie[i]
-  				type.subs = [];
-  				var subType2Sets = {'type' : '2 sets', 
-  									'percent' : stats[i].victories2Sets.real, 
-  									'percentToDisplay' : stats[i].victories2Sets.displayed, 
-  									'color' : colorsPie[i]}
-  				var subType3Sets = {'type' : '3 sets', 
-  									'percent' : stats[i].victories3Sets.real, 
-  									'percentToDisplay' : stats[i].victories3Sets.displayed, 
-  									'color' : colorsPie[i]}
-  				
-  				type.subs.push(subType2Sets);
-  				type.subs.push(subType3Sets);
-
-  				types.push(type);
-  			}
-
-  			console.log(types);
-  			return $q.when(types);
-
-  		});
-  	}
 
   	this.constructMatchesForInOutVictories = function(){
   		return $q.all(promises).then(function(values){
   			
   			var matches = values.matches.data;
   			var players = values.players.data;
-
-  			console.log(matches);
 
   			var stats = statsService.generateInOutPercentageWithVictories(matches, players[0], players[1]);
   			var types = [];

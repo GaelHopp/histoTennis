@@ -114,7 +114,7 @@ return datas.then(function(value){
 */
 
 $scope.amChartOptionsTotalVictories = $scope.generateChartOptionsForPie("Victoires totales", matchService.constructMatchesForTotalVictories()); // datas for total victories
-$scope.amChartOptionsInOutVictories = $scope.generateChartOptionsForPie("Victoires IN/OUT", matchService.constructMatchesForInOutVictories()); // datas for IN/OUT victories
+$scope.amChartOptionsInOutVictories = $scope.generateChartOptionsForPie("Matches IN/OUT", matchService.constructMatchesForInOutVictories()); // datas for IN/OUT victories
 
 
 
