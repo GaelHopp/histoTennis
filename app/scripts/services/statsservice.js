@@ -236,6 +236,117 @@ angular.module('histoTennisApp')
     }
 
 
+    this.generateTieBreakPercentage = function(matches, player1, player2){
+
+        var stats = []
+        var statsSetsWithTB = {}
+        var statsSetsWithoutTB = {}
+
+        var countSets = 0;
+        var countTB = 0;
+        
+        var countTBWonByPlayer1 = 0;
+        var countTBWonByPlayer2 = 0;
+
+        var countOtherSetsWonByPlayer1 = 0;
+        var countOtherSetsWonByPlayer2 = 0;
+
+        console.log(matches);
+
+
+        for(var i = 0; i < matches.length; i++){
+            for(var j = 0; j < matches[i].sets.length; j++){
+               countSets++;
+                if(matches[i].sets[j].tiebreakLoserPoints){
+                   
+                    countTB++;
+                    if(matches[i].idWinner == player1.idPlayer){
+                        if(matches[i].sets[j].winnerGames == "7")
+                            countTBWonByPlayer1++
+                        else
+                            countTBWonByPlayer2++;
+                    }else{
+                        if(matches[i].sets[j].winnerGames == "7")
+                            countTBWonByPlayer2++
+                        else
+                            countTBWonByPlayer1++;
+                    }
+                    
+                }else{
+                     
+                     if(matches[i].idWinner == player1.idPlayer){
+                        if(parseInt(matches[i].sets[j].winnerGames) > parseInt(matches[i].sets[j].loserGames))
+                            countOtherSetsWonByPlayer1++;
+                        else
+                            countOtherSetsWonByPlayer2++;
+                    }else{
+                        if(parseInt(matches[i].sets[j].winnerGames) > parseInt(matches[i].sets[j].loserGames))
+                            countOtherSetsWonByPlayer2++;
+                        else
+                            countOtherSetsWonByPlayer1++;
+                    }
+                }
+                    
+            }
+           
+        }
+
+        console.log(countSets);
+        console.log(countTB);
+
+        console.log(countTBWonByPlayer1);
+        console.log(countTBWonByPlayer2);
+
+        console.log(countOtherSetsWonByPlayer1);
+        console.log(countOtherSetsWonByPlayer2);
+
+        statsSetsWithTB.type = "Sets avec TB";
+        statsSetsWithTB.percent = this.roundTo2decimals(countTB*100/countSets);
+        statsSetsWithTB.percentToDisplay = this.roundTo2decimals(countTB*100/countSets);
+
+        var statsSetsWithTBPlayer1 = {}
+        statsSetsWithTBPlayer1.percent = this.roundTo2decimals(countTBWonByPlayer1*100/countSets);
+        statsSetsWithTBPlayer1.percentToDisplay = this.roundTo2decimals(countTBWonByPlayer1*100/countTB);
+        
+        var statsSetsWithTBPlayer2 = {}
+        statsSetsWithTBPlayer2.percent = this.roundTo2decimals(countTBWonByPlayer2*100/countSets);
+        statsSetsWithTBPlayer2.percentToDisplay = this.roundTo2decimals(countTBWonByPlayer2*100/countTB);
+
+        var statsPlayersWithTB = [];
+        statsPlayersWithTB.push(statsSetsWithTBPlayer1);
+        statsPlayersWithTB.push(statsSetsWithTBPlayer2);
+
+        statsSetsWithTB.statsPlayer = statsPlayersWithTB;
+
+        statsSetsWithoutTB.type = "Sets sans TB";
+        statsSetsWithoutTB.percent = this.roundTo2decimals((countSets - countTB)*100/countSets);
+        statsSetsWithoutTB.percentToDisplay = this.roundTo2decimals((countSets - countTB)*100/countSets);
+
+        var statsSetsWithoutTBPlayer1 = {}
+        statsSetsWithoutTBPlayer1.percent = this.roundTo2decimals(countOtherSetsWonByPlayer1*100/countSets);
+        statsSetsWithoutTBPlayer1.percentToDisplay = this.roundTo2decimals(countOtherSetsWonByPlayer1*100/(countSets - countTB));
+        
+        var statsSetsWithoutTBPlayer2 = {}
+        statsSetsWithoutTBPlayer2.percent = this.roundTo2decimals(countOtherSetsWonByPlayer2*100/countSets);
+        statsSetsWithoutTBPlayer2.percentToDisplay = this.roundTo2decimals(countOtherSetsWonByPlayer2*100/(countSets - countTB));
+
+        var statsPlayersWithoutTB = [];
+        statsPlayersWithoutTB.push(statsSetsWithoutTBPlayer1);
+        statsPlayersWithoutTB.push(statsSetsWithoutTBPlayer2);
+
+        statsSetsWithoutTB.statsPlayer = statsPlayersWithoutTB;
+
+       
+
+        stats.push(statsSetsWithTB);
+        stats.push(statsSetsWithoutTB); 
+
+        
+        return stats;
+
+    }
+
+
 /*
 
 ################## UTILS FUNCTIONS #######################

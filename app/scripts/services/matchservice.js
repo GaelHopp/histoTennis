@@ -137,6 +137,44 @@ angular.module('histoTennisApp')
   		});
   	}
 
+  	this.constructMatchesForTBVictories = function(){
+  		return $q.all(promises).then(function(values){
+  			
+  			var matches = values.matches.data;
+  			var players = values.players.data;
+  			
+
+  			var stats = statsService.generateTieBreakPercentage(matches, players[0], players[1]);
+  			var types = [];
+
+  			for(var i = 0; i < stats.length; i++){
+  				var type = {}
+  				type.type = stats[i].type;
+  				type.percent = stats[i].percent;
+  				type.percentToDisplay = stats[i].percentToDisplay;
+  				type.color = colorsPie[i]
+  				type.subs = [];
+  				var subTypePlayer1 = {'type' : players[0].firstName + " " + players[0].lastName, 
+  									'percent' : stats[i].statsPlayer[0].percent, 
+  									'percentToDisplay' : stats[i].statsPlayer[0].percentToDisplay, 
+  									'color' : colorsPie[i]}
+  				var subTypePlayer2 = {'type' : players[1].firstName + " " + players[1].lastName, 
+  									'percent' : stats[i].statsPlayer[1].percent, 
+  									'percentToDisplay' : stats[i].statsPlayer[1].percentToDisplay, 
+  									'color' : colorsPie[i]}
+  				
+  				type.subs.push(subTypePlayer1);
+  				type.subs.push(subTypePlayer2);
+
+  				types.push(type);
+  			}
+
+  			
+  			return $q.when(types);
+
+  		});
+  	}
+
 
 
   });
