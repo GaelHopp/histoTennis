@@ -13,9 +13,9 @@ angular.module('histoTennisApp')
   	let promises = {
   		matches : remoteService.get('/matches'),
   		players : remoteService.get('/players')
-  	}
+  	};
 
-  	var colorsPie = ["#41b5fb", "#3889e5"];
+  	var colorsPie = ['#41b5fb', '#3889e5'];
 
 
 /*
@@ -33,20 +33,20 @@ angular.module('histoTennisApp')
   			var types = [];
 
   			for(var i = 0; i < stats.length; i++){
-  				var type = {}
-  				type.type = players[i].firstName + " " + players[i].lastName;
+  				var type = {};
+  				type.type = players[i].firstName + ' ' + players[i].lastName;
   				type.percent = stats[i].victories;
   				type.percentToDisplay = stats[i].victories;
-  				type.color = colorsPie[i]
+  				type.color = colorsPie[i];
   				type.subs = [];
   				var subType2Sets = {'type' : '2 sets', 
   									'percent' : stats[i].victories2Sets.real, 
   									'percentToDisplay' : stats[i].victories2Sets.displayed, 
-  									'color' : colorsPie[i]}
+  									'color' : colorsPie[i]};
   				var subType3Sets = {'type' : '3 sets', 
   									'percent' : stats[i].victories3Sets.real, 
   									'percentToDisplay' : stats[i].victories3Sets.displayed, 
-  									'color' : colorsPie[i]}
+  									'color' : colorsPie[i]};
   				
   				type.subs.push(subType2Sets);
   				type.subs.push(subType3Sets);
@@ -58,7 +58,7 @@ angular.module('histoTennisApp')
   			return $q.when(types);
 
   		});
-  	}
+  	};
 
 
 
@@ -72,20 +72,20 @@ angular.module('histoTennisApp')
   			var types = [];
 
   			for(var i = 0; i < stats.length; i++){
-  				var type = {}
+  				var type = {};
   				type.type = stats[i].type;
   				type.percent = stats[i].percent;
   				type.percentToDisplay = stats[i].percent;
-  				type.color = colorsPie[i]
+  				type.color = colorsPie[i];
   				type.subs = [];
-  				var subTypePlayer1 = {'type' : players[0].firstName + " " + players[0].lastName, 
+  				var subTypePlayer1 = {'type' : players[0].firstName + ' ' + players[0].lastName, 
   									'percent' : stats[i].statsPlayer[0].percent, 
   									'percentToDisplay' : stats[i].statsPlayer[0].percentToDisplay, 
-  									'color' : colorsPie[i]}
-  				var subTypePlayer2 = {'type' : players[1].firstName + " " + players[1].lastName, 
+  									'color' : colorsPie[i]};
+  				var subTypePlayer2 = {'type' : players[1].firstName + ' ' + players[1].lastName, 
   									'percent' : stats[i].statsPlayer[1].percent, 
   									'percentToDisplay' : stats[i].statsPlayer[1].percentToDisplay, 
-  									'color' : colorsPie[i]}
+  									'color' : colorsPie[i]};
   				
   				type.subs.push(subTypePlayer1);
   				type.subs.push(subTypePlayer2);
@@ -97,7 +97,7 @@ angular.module('histoTennisApp')
   			return $q.when(types);
 
   		});
-  	}
+  	};
 
   	this.constructMatchesForSBVictories = function(){
   		return $q.all(promises).then(function(values){
@@ -110,20 +110,20 @@ angular.module('histoTennisApp')
   			var types = [];
 
   			for(var i = 0; i < stats.length; i++){
-  				var type = {}
+  				var type = {};
   				type.type = stats[i].type;
   				type.percent = stats[i].percent;
   				type.percentToDisplay = stats[i].percent;
-  				type.color = colorsPie[i]
+  				type.color = colorsPie[i];
   				type.subs = [];
-  				var subTypePlayer1 = {'type' : players[0].firstName + " " + players[0].lastName, 
+  				var subTypePlayer1 = {'type' : players[0].firstName + ' ' + players[0].lastName, 
   									'percent' : stats[i].statsPlayer[0].percent, 
   									'percentToDisplay' : stats[i].statsPlayer[0].percentToDisplay, 
-  									'color' : colorsPie[i]}
-  				var subTypePlayer2 = {'type' : players[1].firstName + " " + players[1].lastName, 
+  									'color' : colorsPie[i]};
+  				var subTypePlayer2 = {'type' : players[1].firstName + ' ' + players[1].lastName, 
   									'percent' : stats[i].statsPlayer[1].percent, 
   									'percentToDisplay' : stats[i].statsPlayer[1].percentToDisplay, 
-  									'color' : colorsPie[i]}
+  									'color' : colorsPie[i]};
   				
   				type.subs.push(subTypePlayer1);
   				type.subs.push(subTypePlayer2);
@@ -135,7 +135,7 @@ angular.module('histoTennisApp')
   			return $q.when(types);
 
   		});
-  	}
+  	};
 
   	this.constructMatchesForTBVictories = function(){
   		return $q.all(promises).then(function(values){
@@ -148,20 +148,20 @@ angular.module('histoTennisApp')
   			var types = [];
 
   			for(var i = 0; i < stats.length; i++){
-  				var type = {}
+  				var type = {};
   				type.type = stats[i].type;
   				type.percent = stats[i].percent;
   				type.percentToDisplay = stats[i].percentToDisplay;
-  				type.color = colorsPie[i]
+  				type.color = colorsPie[i];
   				type.subs = [];
-  				var subTypePlayer1 = {'type' : players[0].firstName + " " + players[0].lastName, 
+  				var subTypePlayer1 = {'type' : players[0].firstName + ' ' + players[0].lastName, 
   									'percent' : stats[i].statsPlayer[0].percent, 
   									'percentToDisplay' : stats[i].statsPlayer[0].percentToDisplay, 
-  									'color' : colorsPie[i]}
-  				var subTypePlayer2 = {'type' : players[1].firstName + " " + players[1].lastName, 
+  									'color' : colorsPie[i]};
+  				var subTypePlayer2 = {'type' : players[1].firstName + ' ' + players[1].lastName, 
   									'percent' : stats[i].statsPlayer[1].percent, 
   									'percentToDisplay' : stats[i].statsPlayer[1].percentToDisplay, 
-  									'color' : colorsPie[i]}
+  									'color' : colorsPie[i]};
   				
   				type.subs.push(subTypePlayer1);
   				type.subs.push(subTypePlayer2);
@@ -173,7 +173,7 @@ angular.module('histoTennisApp')
   			return $q.when(types);
 
   		});
-  	}
+  	};
 
 
 
