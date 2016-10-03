@@ -40,3 +40,36 @@
 
 
 </div>
+
+<div class="col-xs-12 col-md-12">
+      
+<table class="table">
+  <thead class="thead-inverse">
+    <tr>
+      <th>Joueur</th>
+      <th>Victoires</th>
+      <th>Série de victoires</th>
+      <th>Sets/Match</th>
+      <th>Jeux/Sets</th>
+      <th>TB gagnés</th>
+      <th>Points/TB</th>
+      <th>STB gagnés</th>
+      <th>Points/STB</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="p in players">
+      <th scope="row">{{p.firstName}} {{p.lastName}}</th>
+      <td>{{p.victories}}</td>
+      <td>{{p.straightVictories}}</td>
+      <td>{{p.setsPerMatches}}</td>
+      <td>{{p.gamesPerSets}}</td>
+      <td>{{p.tbWon}}</td>
+      <td>{{p.pointsPerTB}}</td>
+      <td>{{p.stbWon}}</td>
+      <td>{{p.pointsPerSTB}}</td>
+    </tr>
+   
+  </tbody>
+</table>
+</div>

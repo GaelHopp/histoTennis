@@ -16,6 +16,8 @@ angular.module('histoTennisApp')
     ];
   
 
+
+
 /*
 Generate function to generate datas with sub types
 */
@@ -105,8 +107,6 @@ return datas.then(function(value){
 
 
 
-
-
 /*
 
 #############################################  GENERATE CHART OPTIONS #####################################################
@@ -120,7 +120,15 @@ $scope.amChartOptionsTBVictories = $scope.generateChartOptionsForPie('TieBreak',
 $scope.amChartOptionsAfterWonFirstSetVictories = $scope.generateChartOptionsForPie('Victoires fonction 1er set', matchService.constructMatchesForAfterWonFirstSetVictories()); // datas for victories after won first set
 
 
+/*
 
+#############################################  GENERATE TABLE DATAS #####################################################
+
+*/
+
+matchService.constructDatasForTable().then(function(data) {
+    $scope.players = data;
+});
 
 
 

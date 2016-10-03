@@ -215,5 +215,28 @@ angular.module('histoTennisApp')
     };
 
 
+    this.constructDatasForTable = function(){
+      return $q.all(promises).then(function(values){
+
+        var matches = values.matches.data;
+        var players = values.players.data;
+
+        for(var i = 0; i < players.length; i++){
+          players[i].victories = statsService.countVictoriesForPlayer(matches, players[i]);
+          players[i].straightVictories = statsService.countStraightVictoriesForPlayer(matches, players[i]);
+          players[i].setsPerMatches = statsService.countSetsPerMatchesForPlayer(matches, players[i]);
+          players[i].gamesPerSets = statsService.countGamesPerSetForPlayer(matches, players[i]);
+          players[i].tbWon = statsService.countTBWon(matches, players[i]);
+          players[i].pointsPerTB = statsService.countPointsPerTBForPlayer(matches, players[i]);
+          players[i].stbWon = statsService.countSTBWon(matches, players[i]);
+          players[i].pointsPerSTB = statsService.countPointsPerSTBForPlayer(matches, players[i]);
+
+        }
+        return players;
+
+      });
+    };
+
+
 
   });

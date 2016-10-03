@@ -464,6 +464,193 @@ angular.module('histoTennisApp')
     };
 
 
+    this.countVictoriesForPlayer = function(matches, player){
+
+        var victories = 0;
+
+        for(var i = 0; i < matches.length; i++){
+            if(matches[i].idWinner === player.idPlayer){
+                victories++;
+            }
+           
+        }
+
+        return victories;
+    };
+
+
+    this.countStraightVictoriesForPlayer = function(matches, player){
+
+        var straightVictories = 0;
+        var tempCount = 0;
+
+        for(var i = 0; i < matches.length; i++){
+            if(matches[i].idWinner === player.idPlayer){
+                tempCount++;
+                
+                if(tempCount > straightVictories){
+                straightVictories = tempCount;
+                }
+            }else{
+                tempCount = 0;
+            }
+           
+        }
+
+        return straightVictories;
+    };
+
+
+    this.countSetsPerMatchesForPlayer = function(matches, player){
+
+        var setsWon = 0;
+
+        for(var i = 0; i < matches.length; i++){
+           for(var j = 0; j < matches[i].sets.length; j++){
+                if(matches[i].idWinner === player.idPlayer){
+                    if(parseInt(matches[i].sets[j].winnerGames) > parseInt(matches[i].sets[j].loserGames)){
+                        setsWon++;
+                    }
+
+                }else{
+                    if(parseInt(matches[i].sets[j].winnerGames) < parseInt(matches[i].sets[j].loserGames)){
+                        setsWon++;
+                    }
+                }
+           }
+        }
+
+        return this.roundTo2decimals(setsWon/matches.length);
+    };
+
+    this.countGamesPerSetForPlayer = function(matches, player){
+
+        var gamesWon = 0;
+        var countSets = 0;
+
+        for(var i = 0; i < matches.length; i++){
+           for(var j = 0; j < matches[i].sets.length; j++){
+                countSets++;
+                if(matches[i].idWinner === player.idPlayer){
+                    gamesWon = this.addUpStrings(gamesWon,matches[i].sets[j].winnerGames);
+                }else{
+                   gamesWon = this.addUpStrings(gamesWon,matches[i].sets[j].loserGames);
+                }
+           }
+        }
+
+        return this.roundTo2decimals(gamesWon/countSets);
+    };
+
+    this.countPointsPerTBForPlayer = function(matches, player){
+
+        var pointsTB = 0;
+        var countTB = 0;
+
+        for(var i = 0; i < matches.length; i++){
+           for(var j = 0; j < matches[i].sets.length; j++){
+                if(matches[i].sets[j].tiebreakLoserPoints !== null){
+                    var loserGames = parseInt(matches[i].sets[j].tiebreakLoserPoints);
+                    countTB++;
+                    if(matches[i].idWinner === player.idPlayer){
+                        if(parseInt(matches[i].sets[j].winnerGames) > parseInt(matches[i].sets[j].loserGames)){
+                            if(loserGames <= 5){
+                                pointsTB += 7;
+                            }else{
+                                pointsTB += loserGames+2;
+                            }
+                        }else{
+                            pointsTB += loserGames;
+                        }
+                    }else{
+                       if(parseInt(matches[i].sets[j].winnerGames) < parseInt(matches[i].sets[j].loserGames)){
+                            if(loserGames <= 5){
+                                pointsTB += 7;
+                            }else{
+                                pointsTB += loserGames+2;
+                            }
+                        }else{
+                            pointsTB += loserGames;
+                        }
+                    }
+                }
+           }
+        }
+
+        return this.roundTo2decimals(pointsTB/countTB);
+    };
+
+    this.countPointsPerSTBForPlayer = function(matches, player){
+
+        var pointsSTB = 0;
+        var countSTB = 0;
+
+        for(var i = 0; i < matches.length; i++){
+           for(var j = 0; j < matches[i].sets.length; j++){
+                if(matches[i].sets[j].superTieBreak === '1'){
+                    var loserGames = parseInt(matches[i].sets[j].loserGames);
+                    var winnerGames = parseInt(matches[i].sets[j].winnerGames);
+                    countSTB++;
+                    if(matches[i].idWinner === player.idPlayer){
+                        pointsSTB += winnerGames;
+                    }else{
+                        pointsSTB += loserGames;
+                    }
+                }
+           }
+        }
+
+        return this.roundTo2decimals(pointsSTB/countSTB);
+    };
+
+    this.countTBWon = function(matches, player){
+
+        var tbWon = 0;
+
+        for(var i = 0; i < matches.length; i++){
+           for(var j = 0; j < matches[i].sets.length; j++){
+               if(matches[i].sets[j].tiebreakLoserPoints !== null){ 
+                    if(matches[i].idWinner === player.idPlayer){
+                        if(parseInt(matches[i].sets[j].winnerGames) > parseInt(matches[i].sets[j].loserGames)){
+                            tbWon++;
+                        }
+                    }else{
+                        if(parseInt(matches[i].sets[j].winnerGames) < parseInt(matches[i].sets[j].loserGames)){
+                            tbWon++;
+                        }
+                    }
+                }
+           }
+        }
+
+        return tbWon;
+    };
+
+    this.countSTBWon = function(matches, player){
+
+        var stbWon = 0;
+
+        for(var i = 0; i < matches.length; i++){
+           for(var j = 0; j < matches[i].sets.length; j++){
+               if(matches[i].sets[j].superTieBreak === '1'){ 
+                    if(matches[i].idWinner === player.idPlayer){
+                       
+                        if(parseInt(matches[i].sets[j].winnerGames) > parseInt(matches[i].sets[j].loserGames)){
+                            stbWon++;
+                        }
+                    }else{
+                        if(parseInt(matches[i].sets[j].winnerGames) < parseInt(matches[i].sets[j].loserGames)){
+                            stbWon++;
+                        }
+                    }
+                }
+           }
+        }
+
+        return stbWon;
+    };
+
+
 /*
 
 ################## UTILS FUNCTIONS #######################
@@ -473,6 +660,12 @@ angular.module('histoTennisApp')
 
     this.roundTo2decimals = function(value){
     	return +(Math.round(value + 'e+2') + 'e-2');
+    };
+
+    this.addUpStrings = function(value1, value2){
+        var int1 = parseInt(value1);
+        var int2 = parseInt(value2);
+        return int1+int2;
     };
 
 
