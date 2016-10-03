@@ -23,7 +23,7 @@ Generate function to generate datas with sub types
 $scope.generateChartDataForPie = function(types, selected) {
   var chartData = [];
   for (var i = 0; i < types.length; i++) {
-    if (i === selected) {
+    if (i === selected && types[i].subs.length > 0) {
       for (var x = 0; x < types[i].subs.length; x++) {
         chartData.push({
           type: types[i].subs[x].type,
@@ -117,6 +117,7 @@ $scope.amChartOptionsTotalVictories = $scope.generateChartOptionsForPie('Victoir
 $scope.amChartOptionsInOutVictories = $scope.generateChartOptionsForPie('Matches IN/OUT', matchService.constructMatchesForInOutVictories()); // datas for IN/OUT victories
 $scope.amChartOptionsSBVictories = $scope.generateChartOptionsForPie('Super TieBreak', matchService.constructMatchesForSBVictories()); // datas for Super TieBreak
 $scope.amChartOptionsTBVictories = $scope.generateChartOptionsForPie('TieBreak', matchService.constructMatchesForTBVictories()); // datas for TieBreak
+$scope.amChartOptionsAfterWonFirstSetVictories = $scope.generateChartOptionsForPie('Victoires fonction 1er set', matchService.constructMatchesForAfterWonFirstSetVictories()); // datas for victories after won first set
 
 
 

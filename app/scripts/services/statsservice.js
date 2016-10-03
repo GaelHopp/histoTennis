@@ -208,7 +208,7 @@ angular.module('histoTennisApp')
                 
         }
 
-        statsMatchesWithSB.type = 'Matches avec SB';
+        statsMatchesWithSB.type = 'Matches avec STB';
         statsMatchesWithSB.percent = this.roundTo2decimals(countMatchWithSB*100/matches.length);
         statsMatchesWithSB.percentToDisplay = this.roundTo2decimals(countMatchWithSB*100/matches.length);
 
@@ -226,7 +226,7 @@ angular.module('histoTennisApp')
 
         statsMatchesWithSB.statsPlayer = statsPlayersWithSB;
 
-        statsMatchesWithoutSB.type = 'Matches sans SB';
+        statsMatchesWithoutSB.type = 'Matches sans STB';
         statsMatchesWithoutSB.percent = this.roundTo2decimals(100 - (countMatchWithSB*100/matches.length));
         statsMatchesWithoutSB.percent = this.roundTo2decimals(100 - (countMatchWithSB*100/matches.length));
 
@@ -268,7 +268,7 @@ angular.module('histoTennisApp')
         var countOtherSetsWonByPlayer1 = 0;
         var countOtherSetsWonByPlayer2 = 0;
 
-        console.log(matches);
+        
 
 
         for(var i = 0; i < matches.length; i++){
@@ -317,14 +317,7 @@ angular.module('histoTennisApp')
            
         }
 
-        console.log(countSets);
-        console.log(countTB);
-
-        console.log(countTBWonByPlayer1);
-        console.log(countTBWonByPlayer2);
-
-        console.log(countOtherSetsWonByPlayer1);
-        console.log(countOtherSetsWonByPlayer2);
+      
 
         statsSetsWithTB.type = 'Sets avec TB';
         statsSetsWithTB.percent = this.roundTo2decimals(countTB*100/countSets);
@@ -366,6 +359,104 @@ angular.module('histoTennisApp')
 
         stats.push(statsSetsWithTB);
         stats.push(statsSetsWithoutTB); 
+
+        
+        return stats;
+
+    };
+
+
+
+    this.generateAfterWonFirstSetPercentage = function(matches, player1, player2){
+
+        var stats = [];
+        var statsMatchsWonAfterWonFirstSet = {};
+        var statsMatchsWonAfterLoseFirstSet = {};
+
+        var countMatches = matches.length;
+        
+        var countMatchesWonByPlayer1AfterWonFirstSet = 0;
+        var countMatchesWonByPlayer2AfterWonFirstSet = 0;
+
+        var countMatchesWonByPlayer1AfterLoseFirstSet = 0;
+        var countMatchesWonByPlayer2AfterLoseFirstSet = 0;
+
+        
+
+
+        for(var i = 0; i < matches.length; i++){
+            
+            if(matches[i].sets.length === 2){
+                if(matches[i].idWinner === player1.idPlayer){
+                    countMatchesWonByPlayer1AfterWonFirstSet++;
+                }
+
+                if(matches[i].idWinner === player2.idPlayer){
+                    countMatchesWonByPlayer2AfterWonFirstSet++;
+                }
+            }else{
+                if(matches[i].idWinner === player1.idPlayer){
+                    if(matches[i].sets[0].winnerGames < matches[i].sets[0].loserGames){
+                        countMatchesWonByPlayer1AfterLoseFirstSet++;
+                    }else{
+                        countMatchesWonByPlayer1AfterWonFirstSet++;
+                    }
+                }
+
+                if(matches[i].idWinner === player2.idPlayer){
+                    if(matches[i].sets[0].winnerGames < matches[i].sets[0].loserGames){
+                        countMatchesWonByPlayer2AfterLoseFirstSet++;
+                    }else{
+                        countMatchesWonByPlayer2AfterWonFirstSet++;
+                    }
+                }
+            }
+           
+        }
+
+      
+
+        statsMatchsWonAfterWonFirstSet.type = 'Gain 1er set';
+        statsMatchsWonAfterWonFirstSet.percent = this.roundTo2decimals((countMatchesWonByPlayer1AfterWonFirstSet+countMatchesWonByPlayer2AfterWonFirstSet)*100/countMatches);
+        statsMatchsWonAfterWonFirstSet.percentToDisplay = this.roundTo2decimals((countMatchesWonByPlayer1AfterWonFirstSet+countMatchesWonByPlayer2AfterWonFirstSet)*100/countMatches);
+
+        var statsMatchsWonAfterWonFirstSetPlayer1 = {};
+        statsMatchsWonAfterWonFirstSetPlayer1.percent = this.roundTo2decimals(countMatchesWonByPlayer1AfterWonFirstSet*100/countMatches);
+        statsMatchsWonAfterWonFirstSetPlayer1.percentToDisplay = this.roundTo2decimals(countMatchesWonByPlayer1AfterWonFirstSet*100/(countMatchesWonByPlayer1AfterWonFirstSet+countMatchesWonByPlayer2AfterWonFirstSet));
+        
+        var statsMatchsWonAfterWonFirstSetPlayer2 = {};
+        statsMatchsWonAfterWonFirstSetPlayer2.percent = this.roundTo2decimals(countMatchesWonByPlayer2AfterWonFirstSet*100/countMatches);
+        statsMatchsWonAfterWonFirstSetPlayer2.percentToDisplay = this.roundTo2decimals(countMatchesWonByPlayer2AfterWonFirstSet*100/(countMatchesWonByPlayer1AfterWonFirstSet+countMatchesWonByPlayer2AfterWonFirstSet));
+
+        var statsPlayersWonAfterWonFirstSet = [];
+        statsPlayersWonAfterWonFirstSet.push(statsMatchsWonAfterWonFirstSetPlayer1);
+        statsPlayersWonAfterWonFirstSet.push(statsMatchsWonAfterWonFirstSetPlayer2);
+
+        statsMatchsWonAfterWonFirstSet.statsPlayer = statsPlayersWonAfterWonFirstSet;
+
+        
+        statsMatchsWonAfterLoseFirstSet.type = 'Défaite 1er set';
+        statsMatchsWonAfterLoseFirstSet.percent = this.roundTo2decimals((countMatchesWonByPlayer1AfterLoseFirstSet+countMatchesWonByPlayer2AfterLoseFirstSet)*100/countMatches);
+        statsMatchsWonAfterLoseFirstSet.percentToDisplay = this.roundTo2decimals((countMatchesWonByPlayer1AfterLoseFirstSet+countMatchesWonByPlayer2AfterLoseFirstSet)*100/countMatches);
+
+        var statsMatchsWonAfterLoseFirstSetPlayer1 = {};
+        statsMatchsWonAfterLoseFirstSetPlayer1.percent = this.roundTo2decimals(countMatchesWonByPlayer1AfterLoseFirstSet*100/countMatches);
+        statsMatchsWonAfterLoseFirstSetPlayer1.percentToDisplay = this.roundTo2decimals(countMatchesWonByPlayer1AfterLoseFirstSet*100/(countMatchesWonByPlayer1AfterLoseFirstSet+countMatchesWonByPlayer2AfterLoseFirstSet));
+        
+        var statsMatchsWonAfterLoseFirstSetPlayer2 = {};
+        statsMatchsWonAfterLoseFirstSetPlayer2.percent = this.roundTo2decimals(countMatchesWonByPlayer2AfterLoseFirstSet*100/countMatches);
+        statsMatchsWonAfterLoseFirstSetPlayer2.percentToDisplay = this.roundTo2decimals(countMatchesWonByPlayer2AfterLoseFirstSet*100/(countMatchesWonByPlayer1AfterLoseFirstSet+countMatchesWonByPlayer2AfterLoseFirstSet));
+
+        var statsPlayersWonAfterLoseFirstSet = [];
+        statsPlayersWonAfterLoseFirstSet.push(statsMatchsWonAfterLoseFirstSetPlayer1);
+        statsPlayersWonAfterLoseFirstSet.push(statsMatchsWonAfterLoseFirstSetPlayer2);
+
+        statsMatchsWonAfterLoseFirstSet.statsPlayer = statsPlayersWonAfterLoseFirstSet;
+
+       
+
+        stats.push(statsMatchsWonAfterWonFirstSet);
+        stats.push(statsMatchsWonAfterLoseFirstSet); 
 
         
         return stats;
