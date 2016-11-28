@@ -6,3 +6,76 @@
 	width: 100%;
 	height: 100%;
 }
+
+div > hr{
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.match-container{
+	width: 500px;
+}
+
+
+.match{
+	position : relative;
+	min-width : 600px;
+	height: 50px;
+	margin: 5px;
+	border: solid 1px black;
+	border-radius: 5px;
+}
+.type{
+	position : absolute;
+	top: 3px;
+	left : 3px;
+	width : 40px;
+	height : 40px;
+	border-radius: 50%;
+	box-shadow: -1px 2px 2px 1px rgba(150,150,150,0.5);
+}
+.player{
+	position : absolute;
+	top: 3px;
+	left : 50px;
+	width : 50%
+}
+.name {
+	margin-bottom: 7px;
+}
+.scores{
+	position : absolute;
+	top: 3px;
+	right : 3px;	
+}
+.set{
+	float: left;
+	min-width: 50px;
+	text-align: center;
+}
+.points{
+	position : relative;
+	margin-bottom: 7px;
+}
+.withTieBreak > .points{
+	padding-right: 10px;
+}
+.withTieBreak > .points > div {
+	font-size : 0.7em;
+	min-width: 30%;
+	text-align: left;
+	position: absolute;
+	top:0;
+	right:2px;
+}
+.win {
+	font-weight : bold;
+}
+.separator {
+	position: absolute;
+	right: 5px; left : 55px;
+	top: 23px;
+	height: 1px;
+	background-color: #ccc;
+}
+

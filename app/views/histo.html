@@ -1,3 +1,29 @@
 <div class ="histo-view">
-<p class="test-css">This is the histo view.</p>
+
+<div ng-repeat="match in matches" class="match-container">
+	<div class="match">
+	<div class="type">
+	</div>
+	<div class="player">
+		<div class="name">{{match.winner.firstName}}</div>
+		<div class="name">{{match.loser.firstName}}</div>
+	</div>
+	<div class="scores">
+		<div ng-repeat="set in match.sets" ng-class="{set: set.winnerGames > 0, withTieBreak: set.tiebreakLoserPoints}">
+			<div ng-class="{points: set.winnerGames > 0, win: (set.winnerGames > set.loserGames && set.superTieBreak == '0') || set.superTieBreak == '1' }">{{set.winnerGames}}
+				<div ng-if="set.tiebreakLoserPoints">{{set.tiebreakLoserPoints}}</div>
+			</div>
+			<div ng-class="{points: set.winnerGames > 0, win: (set.winnerGames < set.loserGames && set.superTieBreak == '0')}">{{set.loserGames}}
+				<div ng-if="set.tiebreakLoserPoints">{{set.tiebreakLoserPoints}}</div>
+			</div>
+		</div>
+		
+
+	
+	</div>
+	<div class="separator"></div>
+</div>
+
+</div>
+
 </div>

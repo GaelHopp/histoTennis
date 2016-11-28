@@ -238,5 +238,22 @@ angular.module('histoTennisApp')
     };
 
 
+    /*
+
+######### CONSTRUCT MATCHES FOR HISTO DISPLAY ##########
+
+*/
+
+this.constructMatches = function(){
+      return $q.all(promises).then(function(values){
+
+        var matches = values.matches.data;
+        
+        return matches;
+
+      });
+    };
+
+
 
   });
