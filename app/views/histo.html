@@ -11,10 +11,12 @@
 	<div class="scores">
 		<div ng-repeat="set in match.sets" ng-class="{set: set.winnerGames > 0, withTieBreak: set.tiebreakLoserPoints}">
 			<div ng-class="{points: set.winnerGames > 0, win: (set.winnerGames > set.loserGames && set.superTieBreak == '0') || set.superTieBreak == '1' }">{{set.winnerGames}}
-				<div ng-if="set.tiebreakLoserPoints">{{set.tiebreakLoserPoints}}</div>
+				<div ng-if="set.winnerGames < 7">{{set.tiebreakLoserPoints}}</div>
+				<div ng-if="set.winnerGames > 6">{{set.tiebreakWinnerPoints}}</div>
 			</div>
 			<div ng-class="{points: set.winnerGames > 0, win: (set.winnerGames < set.loserGames && set.superTieBreak == '0')}">{{set.loserGames}}
-				<div ng-if="set.tiebreakLoserPoints">{{set.tiebreakLoserPoints}}</div>
+				<div ng-if="set.loserGames < 7">{{set.tiebreakLoserPoints}}</div>
+				<div ng-if="set.loserGames > 6">{{set.tiebreakWinnerPoints}}</div>
 			</div>
 		</div>
 		
