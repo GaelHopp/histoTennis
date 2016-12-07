@@ -17,6 +17,21 @@ angular.module('histoTennisApp')
 
   	var colorsPie = ['#FE6600', '#222'];
 
+    var months = {
+      '01' : "Jan",
+      '02' : "Fev",
+      '03' : "Mar",
+      '04' : "Avr",
+      '05' : "Mai",
+      '06' : "Juin",
+      '07' : "Juil",
+      '08' : "Aoû",
+      '09' : "Sep",
+      '10' : "Oct",
+      '11' : "Nov",
+      '12' : "Dec"
+    };
+
 
 /*
 
@@ -250,6 +265,14 @@ this.constructMatches = function(){
         var matches = values.matches.data;
         
         for(var i = 0; i < matches.length; i++){
+
+          var dateSplit = matches[i].dateMatch.split('-');
+
+          matches[i].dateMatchYear = dateSplit[0];
+          matches[i].dateMatchMonth = months[dateSplit[1]];
+          matches[i].dateMatchDay = dateSplit[2];
+
+
           for(var j = 0; j < matches[i].sets.length; j++){
             if(matches[i].sets[j].tiebreakLoserPoints){
               var loserPoints = Number(matches[i].sets[j].tiebreakLoserPoints);

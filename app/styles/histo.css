@@ -13,21 +13,32 @@ div > hr{
 }
 
 .match-container{
-	width: 500px;
+	width: 50%;
+	margin-left : 25%;
 }
 
+.match-font{
+	font-size: 1.3em;
+	font-family: "Book Antiqua";
+}
 
 .match{
 	position : relative;
 	min-width : 600px;
-	height: 50px;
-	margin: 5px;
+	height: 67px;
+	margin: 20px;
 	border: solid 1px black;
 	border-radius: 5px;
+	
 }
+
+.toSave{
+	margin-bottom: 50px;
+}
+
 .type{
 	position : absolute;
-	top: 3px;
+	top: 12px;
 	left : 3px;
 	width : 40px;
 	height : 40px;
@@ -35,6 +46,12 @@ div > hr{
 	box-shadow: -1px 2px 2px 1px rgba(150,150,150,0.5);
 }
 .player{
+	position : absolute;
+	top: 3px;
+	left : 150px;
+	width : 50%
+}
+.date{
 	position : absolute;
 	top: 3px;
 	left : 50px;
@@ -73,9 +90,73 @@ div > hr{
 }
 .separator {
 	position: absolute;
-	right: 5px; left : 55px;
-	top: 23px;
+	right: 5px; left : 155px;
+	top: 30px;
 	height: 1px;
 	background-color: #ccc;
 }
+
+.matchIn{
+	background-color: #4EC45A;
+}
+
+.matchOut{
+	background-color: #DD6021;
+}
+
+/* DATE */
+
+.HopeDate{
+	position: relative;
+	width: 60px;
+	height: 50px;
+	border-top-right-radius: 15px;
+	border-top-left-radius: 15px;
+	border: solid 1px grey;
+	box-shadow: 10px 5px 20px #ccc;
+	text-align: center;
+	text-transform: capitalize;
+	margin-left: 10px;
+	margin-top: 3px;
+}
+
+.headerDate{
+	position: relative;
+	padding: 0px 3px 3px 3px;
+	border-top-left-radius: 15px;
+	border-top-right-radius: 15px;
+	background-color: #ff9900;
+}
+
+.body{
+	padding: 5px;
+}
+
+.month{
+	font-size: 10px;
+	color: black;
+	font-weight: bold;
+}
+
+.year{
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	color: black;
+	border-bottom: 2px #ff5522;
+}
+
+.day{
+	font-size: 15px; 
+	font-weight: bold;
+	border-bottom: 2px dashed #ff5522;
+}
+
+.nameDate{
+	font-size: 10px;
+	color: #ff9900;
+}
+
+
 
