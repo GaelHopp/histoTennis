@@ -1,17 +1,9 @@
 <div class ="histo-view">
 
-<div class="match-container">
-	<div class="match toSave">
+<div class="match-container-save">
+	<div class="match toSave match-font">
 		<div class="type">
-			<div class="btn-group">
-			<button class="btn btn-default btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expended="false">
-				Test
-				<span class="caret"></span>
-			</button>
-			<ul class="dropdown-menu">
-				<li>Test1</li>
-			</ul>	
-		</div>
+			<!-- TOOGLE -->
 		</div>
 		<div class="date">
 			
@@ -19,26 +11,53 @@
 
 		</div>
 		<div class="player">
-			<div class="name">{{match.winner.firstName}}</div>
-			<div class="name">{{match.loser.firstName}}</div>
+			<div class="name">{{players[0].firstName}}</div>
+			<div class="name">{{players[1].firstName}}</div>
 		</div>
 		<div class="scores">
-			<div ng-repeat="set in match.sets" ng-class="{set: set.winnerGames > 0, withTieBreak: set.tiebreakLoserPoints}">
-				<div ng-class="{points: set.winnerGames > 0, win: (set.winnerGames > set.loserGames && set.superTieBreak == '0') || set.superTieBreak == '1' }">{{set.winnerGames}}
-					<div ng-if="set.winnerGames < 7">{{set.tiebreakLoserPoints}}</div>
-					<div ng-if="set.winnerGames > 6">{{set.tiebreakWinnerPoints}}</div>
+			<div class="set">
+				<div class="points">
+					<input ng-model="pointsSet1Player1" ng-change="checkScore()" class="set-to-save" type="text" class="form-control" aria-describerby="basic-addon2">
+					<input ng-show="set1TB" ng-model="pointsSet1Player1TB" ng-change="checkScore()" class="set-to-save" type="text" class="form-control" aria-describerby="basic-addon2">
 				</div>
-				<div ng-class="{points: set.winnerGames > 0, win: (set.winnerGames < set.loserGames && set.superTieBreak == '0')}">{{set.loserGames}}
-					<div ng-if="set.loserGames < 7">{{set.tiebreakLoserPoints}}</div>
-					<div ng-if="set.loserGames > 6">{{set.tiebreakWinnerPoints}}</div>
+				<div class="points">
+					<input ng-model="pointsSet1Player2" ng-change="checkScore()" class="set-to-save" type="text" class="form-control" aria-describerby="basic-addon2">
+					<input ng-show="set1TB" ng-model="pointsSet1Player2TB" ng-change="checkScore()" class="set-to-save" type="text" class="form-control" aria-describerby="basic-addon2">
+				</div>
+			</div>
+
+			<div class="set">
+				<div class="points">
+					<input ng-model="pointsSet2Player1" ng-change="checkScore()" class="set-to-save" type="text" class="form-control" aria-describerby="basic-addon2">
+					<input ng-show="set2TB" ng-model="pointsSet2Player1TB" ng-change="checkScore()" class="set-to-save" type="text" class="form-control" aria-describerby="basic-addon2">
+				</div>
+				<div class="points">
+					<input ng-model="pointsSet2Player2" ng-change="checkScore()" class="set-to-save" type="text" class="form-control" aria-describerby="basic-addon2">
+					<input ng-show="set2TB" ng-model="pointsSet2Player2TB" ng-change="checkScore()" class="set-to-save" type="text" class="form-control" aria-describerby="basic-addon2">
+				</div>
+			</div>
+
+
+			<div ng-show="is3sets" class="set">
+				<div class="points">
+					<input ng-model="pointsSet3Player1" ng-change="checkScore()" class="set-to-save" type="text" class="form-control" aria-describerby="basic-addon2">
+					<input ng-show="set3TB" ng-model="pointsSet3Player1" ng-change="checkScore()" class="set-to-save" type="text" class="form-control" aria-describerby="basic-addon2">
+				</div>
+				<div class="points">
+					<input ng-model="pointsSet3Player2" ng-change="checkScore()" class="set-to-save" type="text" class="form-control" aria-describerby="basic-addon2">
+					<input ng-show="set3TB" ng-model="pointsSet3Player1" ng-change="checkScore()" class="set-to-save" type="text" class="form-control" aria-describerby="basic-addon2">
 				</div>
 			</div>
 			
 
 		
 		</div>
+		<div ng-show="scoreCorrect" class="button-save">
+		<button type="button" class="btn btn-default btn-save"><span class="glyphicon glyphicon-floppy-disk"></span></button>
+	</div>
 		<div class="separator"></div>
 	</div>
+	
 </div>
 <div ng-repeat="match in matches" class="match-container">
 	<div class="match match-font">
@@ -56,7 +75,7 @@
 			</div>
 	</div>
 	<div class="player">
-		<div class="name">{{match.winner.firstName}}</div>
+		<div class="name">{{match.winner.firstName}} <span class="match-winner glyphicon glyphicon-ok"></span></div>
 		<div class="name">{{match.loser.firstName}}</div>
 	</div>
 	<div class="scores">

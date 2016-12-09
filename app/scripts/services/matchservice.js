@@ -290,5 +290,16 @@ this.constructMatches = function(){
     };
 
 
+    this.getPlayers = function(){
+      return $q.all(promises).then(function(values){
+
+        var players = values.players.data;
+       
+        return players;
+
+      });
+    };
+
+
 
   });

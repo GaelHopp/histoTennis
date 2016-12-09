@@ -17,6 +17,12 @@ div > hr{
 	margin-left : 25%;
 }
 
+.match-container-save{
+	width: 1000px;
+	margin-left : 25%;
+}
+
+
 .match-font{
 	font-size: 1.3em;
 	font-family: "Book Antiqua";
@@ -24,7 +30,8 @@ div > hr{
 
 .match{
 	position : relative;
-	min-width : 600px;
+	min-width : 400px;
+	max-width: 640px;
 	height: 67px;
 	margin: 20px;
 	border: solid 1px black;
@@ -67,7 +74,7 @@ div > hr{
 }
 .set{
 	float: left;
-	min-width: 50px;
+	min-width: 60px;
 	text-align: center;
 }
 .points{
@@ -103,6 +110,30 @@ div > hr{
 .matchOut{
 	background-color: #DD6021;
 }
+
+.match-winner{
+	font-size: 0.8em;
+}
+
+
+.set-to-save{
+	width: 25px;
+	height: 22px;
+}
+
+.button-save{
+	width: 50px;
+	margin-left: 650px;
+	font-size: 2.3em;
+}
+
+.btn-save{
+	width: 50px;
+	height: 50px;
+	font-size: 0.8em;
+	padding: 8px 10px;
+}
+
 
 /* DATE */
 
