@@ -19,7 +19,11 @@ angular
     'amChartsDirective',
     'ngMaterial'
   ])
-  .config(function ($routeProvider) {
+  .config(function ($routeProvider, $httpProvider) {
+    $httpProvider.defaults.headers.common = {};
+    $httpProvider.defaults.headers.post = {};
+    $httpProvider.defaults.headers.put = {};
+    $httpProvider.defaults.headers.get = {};
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',

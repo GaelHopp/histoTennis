@@ -32,15 +32,35 @@ angular.module('histoTennisApp')
 
 
     $scope.init = function(){
+    	
+    	
     	$scope.set1TB = false;
     	$scope.set2TB = false;
     	$scope.set3TB = false;
     	$scope.is3sets = false;
     	$scope.scoreCorrect = false;
+    	$scope.indoorMatch = true;
+    	$scope.pointsSet1Player1 = "";
+    	$scope.pointsSet1Player2 = "";
+    	$scope.pointsSet2Player1 = "";
+    	$scope.pointsSet2Player2 = "";
+    	$scope.pointsSet3Player1 = "";
+    	$scope.pointsSet3Player2 = "";
+    	$scope.pointsSet1Player1TB = "";
+    	$scope.pointsSet1Player2TB = "";
+    	$scope.pointsSet2Player1TB = "";
+    	$scope.pointsSet2Player2TB = "";
+    	$scope.pointsSet3Player1TB = "";
+    	$scope.pointsSet3Player2TB = "";
 
+    	var today = new Date();
+    	var stringToday = today.toISOString().substring(0, 10);
+    	
     	$scope.matchToSave = {
-    		indoorMatch : true
+    		dateMatch : stringToday
     	};
+
+    	
 
     }
 
@@ -94,7 +114,7 @@ angular.module('histoTennisApp')
 				var pointsPlayer1Number = parseInt(pointsPlayer1);
 				var pointsPlayer2Number = parseInt(pointsPlayer2);
 
-				if(pointsPlayer1Number === 6 && (pointsPlayer2Number < 5 || pointsPlayer2Number === 7)){
+				if((pointsPlayer1Number === 6 && (pointsPlayer2Number < 5 || pointsPlayer2Number === 7)) || (pointsPlayer1Number === 7 && pointsPlayer2Number === 5)){
 					if(pointsPlayer2Number === 7 && pointsPlayer1Number === 6){
 						if(setNumber === 1){
 							$scope.set1TB = true;
@@ -118,7 +138,9 @@ angular.module('histoTennisApp')
 					
 				}
 
-				if(pointsPlayer2Number === 6 && (pointsPlayer1Number < 5 || pointsPlayer1Number === 7)){
+
+
+				if((pointsPlayer2Number === 6 && (pointsPlayer1Number < 5 || pointsPlayer1Number === 7)) || (pointsPlayer2Number === 7 && pointsPlayer1Number === 5)){
 					if(pointsPlayer1Number === 7 && pointsPlayer2Number === 6){
 						if(setNumber === 1){
 							$scope.set1TB = true;
@@ -159,7 +181,7 @@ angular.module('histoTennisApp')
 				var pointsPlayer1Number = parseInt(pointsPlayer1);
 				var pointsPlayer2Number = parseInt(pointsPlayer2);
 
-				if(pointsPlayer1Number === 6 && (pointsPlayer2Number < 5 || pointsPlayer2Number === 7)){
+				if((pointsPlayer1Number === 6 && (pointsPlayer2Number < 5 || pointsPlayer2Number === 7)) || (pointsPlayer1Number === 7 && pointsPlayer2Number === 5)){
 					if(pointsPlayer2Number === 7 && pointsPlayer1Number === 6){
 						$scope.set3TB = true;
 						var tbCorrect = $scope.checkSetTB(pointsPlayer1, pointsPlayer2, $scope.pointsSet3Player1TB, $scope.pointsSet3Player2TB);
@@ -172,7 +194,7 @@ angular.module('histoTennisApp')
 					
 				}
 
-				if(pointsPlayer2Number === 6 && (pointsPlayer1Number < 5 || pointsPlayer1Number === 7)){
+				if((pointsPlayer2Number === 6 && (pointsPlayer1Number < 5 || pointsPlayer1Number === 7)) || (pointsPlayer2Number === 7 && pointsPlayer1Number === 5)){
 					if(pointsPlayer1Number === 7 && pointsPlayer2Number === 6){
 						$scope.set3TB = true;
 						var tbCorrect = $scope.checkSetTB(pointsPlayer1, pointsPlayer2, $scope.pointsSet3Player1TB, $scope.pointsSet3Player2TB);
@@ -262,7 +284,12 @@ angular.module('histoTennisApp')
 
 	$scope.constructMatchToSave = function(pointsSet1Player1, pointsSet1Player2, pointsSet2Player1, pointsSet2Player2, pointsSet3Player1, pointsSet3Player2, pointsSet1Player1TB, pointsSet1Player2TB, pointsSet2Player1TB, pointsSet2Player2TB, pointsSet3Player1TB, pointsSet3Player2TB){
 		
-		$scope.matchToSave.dateMatch = $scope.dateMatchToSave;
+		if($scope.indoorMatch){
+			$scope.matchToSave.indoorMatch = 1;
+		}else{
+			$scope.matchToSave.indoorMatch = 0;
+		}
+		
 
 		if(pointsSet1Player1 > pointsSet1Player2){
 			if(pointsSet2Player1 > pointsSet2Player2){
@@ -443,7 +470,13 @@ angular.module('histoTennisApp')
 		}
 
 		$scope.constructMatchToSave(pointsSet1Player1, pointsSet1Player2, pointsSet2Player1, pointsSet2Player2, pointsSet3Player1, pointsSet3Player2, pointsSet1Player1TB, pointsSet1Player2TB, pointsSet2Player1TB, pointsSet2Player2TB, pointsSet3Player1TB, pointsSet3Player2TB);
-		console.log($scope.matchToSave);
+		matchService.saveMatch($scope.matchToSave).then(function(values){
+
+       $scope.matches = values;
+       $scope.init();
+
+      });
+
 
 	}
 

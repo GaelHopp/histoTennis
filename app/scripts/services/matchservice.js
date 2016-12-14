@@ -301,5 +301,43 @@ this.constructMatches = function(){
     };
 
 
+this.saveMatch = function(match){
+      return remoteService.post('/match/new', match).then(function(values){
+        
+        return remoteService.get('/matches').then(function(datas){
+          
+          var matches = datas.data;
+    
+
+          for(var i = 0; i < matches.length; i++){
+
+          var dateSplit = matches[i].dateMatch.split('-');
+
+          matches[i].dateMatchYear = dateSplit[0];
+          matches[i].dateMatchMonth = months[dateSplit[1]];
+          matches[i].dateMatchDay = dateSplit[2];
+
+
+          for(var j = 0; j < matches[i].sets.length; j++){
+            if(matches[i].sets[j].tiebreakLoserPoints){
+              var loserPoints = Number(matches[i].sets[j].tiebreakLoserPoints);
+              if(loserPoints < 6){
+                matches[i].sets[j].tiebreakWinnerPoints = 7;
+              }else{
+                matches[i].sets[j].tiebreakWinnerPoints = loserPoints + 2;
+              }
+            }
+          }
+        }
+
+        return matches;
+
+
+      });
+
+      });
+      
+    };
+
 
   });

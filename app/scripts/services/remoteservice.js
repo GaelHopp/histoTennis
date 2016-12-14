@@ -18,6 +18,10 @@ this.get = function(url){
   return $http.get(domain+url);
 };
 
+this.post = function(url, data){
+  return $http.post(domain+url, data);
+};
+
 
 
 

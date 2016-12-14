@@ -3,7 +3,7 @@
 <div class="match-container-save">
 	<div class="match toSave match-font">
 		<div class="typeToSave">
-			<md-switch ng-model="matchToSave.indoorMatch" aria-label="">
+			<md-switch ng-model="indoorMatch" aria-label="">
 		</md-switch>
 		</div>
 		<div class="date">
@@ -42,11 +42,11 @@
 			<div ng-show="is3sets" class="set">
 				<div class="points">
 					<input ng-model="pointsSet3Player1" ng-change="checkScore()" class="set-to-save" type="text" class="form-control" aria-describerby="basic-addon2">
-					<input ng-show="set3TB" ng-model="pointsSet3Player1" ng-change="checkScore()" class="set-to-save" type="text" class="form-control" aria-describerby="basic-addon2">
+					<input ng-show="set3TB" ng-model="pointsSet3Player1TB" ng-change="checkScore()" class="set-to-save" type="text" class="form-control" aria-describerby="basic-addon2">
 				</div>
 				<div class="points">
 					<input ng-model="pointsSet3Player2" ng-change="checkScore()" class="set-to-save" type="text" class="form-control" aria-describerby="basic-addon2">
-					<input ng-show="set3TB" ng-model="pointsSet3Player1" ng-change="checkScore()" class="set-to-save" type="text" class="form-control" aria-describerby="basic-addon2">
+					<input ng-show="set3TB" ng-model="pointsSet3Player2TB" ng-change="checkScore()" class="set-to-save" type="text" class="form-control" aria-describerby="basic-addon2">
 				</div>
 			</div>
 			
