@@ -52,6 +52,19 @@ div > hr{
 	border-radius: 50%;
 	box-shadow: -1px 2px 2px 1px rgba(150,150,150,0.5);
 }
+
+.typeToSave{
+	position : absolute;
+	top: 0px;
+	left : 8px;
+	
+}
+
+.switch{
+	width: 50px;
+	height: 25px;
+}
+
 .player{
 	position : absolute;
 	top: 3px;
@@ -134,6 +147,29 @@ div > hr{
 	padding: 8px 10px;
 }
 
+md-switch .md-bar{
+	left: 1px;
+	width: 45px;
+	top: 5px;
+	height: 20px;
+	border-radius: 8px;
+	position: absolute;
+}
+
+md-switch .md-thumb{
+	position: absolute;
+	margin: 0;
+	left: 0;
+	top: -5px;
+	outline: none;
+	height: 35px;
+	width: 35px;
+	border-radius: 50%;
+}
+
+md-datepicker .md-datepicker-input-container{
+	opacity: 0;
+}
 
 /* DATE */
 

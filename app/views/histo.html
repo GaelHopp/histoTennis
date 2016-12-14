@@ -2,12 +2,13 @@
 
 <div class="match-container-save">
 	<div class="match toSave match-font">
-		<div class="type">
-			<!-- TOOGLE -->
+		<div class="typeToSave">
+			<md-switch ng-model="matchToSave.indoorMatch" aria-label="">
+		</md-switch>
 		</div>
 		<div class="date">
 			
-			
+			<md-datepicker ng-model="dateMatchToSave"></date-picker>
 
 		</div>
 		<div class="player">
@@ -53,7 +54,7 @@
 		
 		</div>
 		<div ng-show="scoreCorrect" class="button-save">
-		<button type="button" class="btn btn-default btn-save"><span class="glyphicon glyphicon-floppy-disk"></span></button>
+		<button ng-click="save()" type="button" class="btn btn-default btn-save"><span class="glyphicon glyphicon-floppy-disk"></span></button>
 	</div>
 		<div class="separator"></div>
 	</div>

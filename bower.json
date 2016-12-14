@@ -10,7 +10,9 @@
     "angular-route": "^1.4.0",
     "angular-sanitize": "^1.4.0",
     "angular-touch": "^1.4.0",
-    "amcharts-angular": "*"
+    "amcharts-angular": "*",
+    "angular-bootstrap-toggle": "^0.1.2",
+    "angular-material": "^1.1.1"
   },
   "devDependencies": {
     "angular-mocks": "^1.4.0"
