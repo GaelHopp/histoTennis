@@ -3,12 +3,13 @@
 <div class="match-container-save">
 	<div class="match toSave match-font">
 		<div class="typeToSave">
-			<md-switch ng-model="indoorMatch" aria-label="">
+			<md-switch ng-model="indoorMatch">
 		</md-switch>
 		</div>
 		<div class="date">
-			
-			<md-datepicker ng-model="dateMatchToSave"></date-picker>
+		<datepicker date-format="yyyy-MM-dd">
+  			<input ng-change="debug()" class="date-picker" ng-model="matchToSave.dateMatch" type="text"/>
+		</datepicker>
 
 		</div>
 		<div class="player">

@@ -15,9 +15,11 @@ angular
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch',
     'amChartsDirective',
-    'ngMaterial'
+    'ngMaterial',
+    'ngMessages',
+    'ngAria',
+    '720kb.datepicker'
   ])
   .config(function ($routeProvider, $httpProvider) {
     $httpProvider.defaults.headers.common = {};

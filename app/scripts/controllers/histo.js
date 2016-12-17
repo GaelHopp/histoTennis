@@ -33,7 +33,7 @@ angular.module('histoTennisApp')
 
     $scope.init = function(){
     	
-    	
+    	$scope.dateMatchToSave = new Date();
     	$scope.set1TB = false;
     	$scope.set2TB = false;
     	$scope.set3TB = false;
@@ -60,9 +60,10 @@ angular.module('histoTennisApp')
     		dateMatch : stringToday
     	};
 
-    	
+    	console.log($scope.matchToSave.dateMatch);
 
     }
+
 
 
     $scope.checkScore = function(){

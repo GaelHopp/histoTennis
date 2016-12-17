@@ -147,6 +147,17 @@ div > hr{
 	padding: 8px 10px;
 }
 
+md-switch.md-checked .md-bar{
+	left: 1px;
+	width: 45px;
+	top: 5px;
+	height: 20px;
+	border-radius: 8px;
+	position: absolute;
+	background-color: grey;
+	opacity: 0.5;
+}
+
 md-switch .md-bar{
 	left: 1px;
 	width: 45px;
@@ -154,6 +165,20 @@ md-switch .md-bar{
 	height: 20px;
 	border-radius: 8px;
 	position: absolute;
+	background-color: grey;
+	opacity: 0.5;
+}
+
+md-switch.md-checked .md-thumb{
+	position: absolute;
+	margin: 0;
+	left: 0;
+	top: -5px;
+	outline: none;
+	height: 35px;
+	width: 35px;
+	border-radius: 50%;
+	background-color: #4EC45A;
 }
 
 md-switch .md-thumb{
@@ -165,10 +190,13 @@ md-switch .md-thumb{
 	height: 35px;
 	width: 35px;
 	border-radius: 50%;
+	background-color: #DD6021;
 }
 
-md-datepicker .md-datepicker-input-container{
-	opacity: 0;
+.date-picker{
+	width : 78px;
+	margin-left : 15px;
+	margin-top: 18px;
 }
 
 /* DATE */
