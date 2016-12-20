@@ -8,15 +8,27 @@
  * Controller of the histoTennisApp
  */
 angular.module('histoTennisApp')
-  .controller('MainCtrl', function ($scope, $http, $q, matchService) {
+  .controller('MainCtrl', function ($rootScope, $scope, $http, $q, $window, matchService) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
       'Karma'
     ];
   
+$rootScope.hasAccess = false;
 
+$scope.checkAdmin = function(){
+  if($scope.password === "133133"){
+    $window.localStorage.setItem("access", "OK");
+  }
 
+  if($window.localStorage.getItem("access") === "OK"){
+    $rootScope.hasAccess = true;
+  }
+  $scope.password = "";
+}
+
+$scope.checkAdmin();
 
 /*
 Generate function to generate datas with sub types

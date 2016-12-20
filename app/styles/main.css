@@ -116,3 +116,13 @@ body {
   color: white;
 }
 
+.admin{
+  width : 80px;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+
+.button-admin{
+  height: 26px;
+}
+

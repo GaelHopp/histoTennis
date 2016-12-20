@@ -33,7 +33,10 @@
             <li><a href="#!/score">Score Live</a></li> 
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Admin</a></li>
+             <div ng-controller="MainCtrl" class="input-group">
+             <input ng-model="password" class="admin" type="text" class="form-control" aria-describedby="basic-addon1">
+             <button ng-click="checkAdmin()" type="button" class="btn btn-default button-admin">Admin</button>
+         </div>
           </ul>
         </div>
       </nav>
