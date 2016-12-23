@@ -1,3 +1,72 @@
-<p class="test-css">This is the score view.</p>
+<div class ="histo-view">
 
+<div ng-show="hasAccess" class="match-container-save">
+	<div class="match toSave match-font">
+		
+		
+		<div class="player">
+			
+			<div class="name">
+				<div class="input-group">
+					
+						<input ng-model="player1Serving" ng-value="true" type="radio" name="isPlayer1Serving">
+					
+				<input ng-model="player1" class="player-to-save" type="text" class="form-control" aria-describerby="basic-addon2">
+			</div>
+			</div>
+			<div class="name">
+				<div class="input-group">
+					
+						<input ng-model="player1Serving" ng-value="false" type="radio" name="isPlayer1Serving">
+					
+				<input ng-model="player2" class="player-to-save" type="text" class="form-control" aria-describerby="basic-addon2">
+			</div>
+			</div>
+		</div>
+		
+		<div ng-show="areNamesCorrect()" class="button-save">
+		<button ng-click="saveMatchLive()" type="button" class="btn btn-default btn-save"><span class="glyphicon glyphicon-floppy-disk"></span></button>
+	</div>
+		<div class="separator"></div>
+	</div>
+	
+</div>
+<div ng-repeat="match in matchesLive" class="match-container">
+	<div class="match match-font">
+
+	<div class="player">
+		<div ng-show="match.player1Serving == 1" id="serve" class="servePlayer1"></div>
+		<div class="name">{{match.player1}}</div>
+		<div ng-show="match.player1Serving == 0" id="serve" class="servePlayer2"></div>
+		<div class="name">{{match.player2}}</div>
+	</div>
+	<div class="scores">
+		<div class="set">
+			<div class="points">{{match.set1Player1}}			
+			</div>
+			<div class="points">{{match.set1Player2}}
+			</div>
+		</div>
+
+		<div class="set">
+			<div class="points">{{match.set2Player1}}			
+			</div>
+			<div class="points">{{match.set2Player2}}
+			</div>
+		</div>
+
+		<div class="set">
+			<div class="points">{{match.set3Player1}}			
+			</div>
+			<div class="points">{{match.set3Player2}}
+			</div>
+		</div>
+
+	</div>
+	<div class="separator"></div>
+</div>
+
+</div>
+
+</div>
 

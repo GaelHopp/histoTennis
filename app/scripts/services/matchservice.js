@@ -12,7 +12,8 @@ angular.module('histoTennisApp')
    
   	let promises = {
   		matches : remoteService.get('/matches'),
-  		players : remoteService.get('/players')
+  		players : remoteService.get('/players'),
+      matchesLive : remoteService.get('/matchesLive')
   	};
 
   	var colorsPie = ['#FE6600', '#222'];
@@ -337,6 +338,35 @@ this.saveMatch = function(match){
 
       });
       
+    };
+
+
+    this.saveMatchLive = function(match){
+      return remoteService.post('/matchLive/new', match).then(function(values){
+        
+        return remoteService.get('/matchesLive').then(function(datas){
+          
+          var matches = datas.data;
+  
+
+        return matches;
+
+
+      });
+
+      });
+      
+    };
+
+
+    this.getMatchesLive = function(){
+      return $q.all(promises).then(function(values){
+
+        var matches = values.matchesLive.data;
+       
+        return matches;
+
+      });
     };
 
 

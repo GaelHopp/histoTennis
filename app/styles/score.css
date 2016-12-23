@@ -1,3 +1,35 @@
 .test-css{
 	color: red;
 }
+
+.player-to-save{
+	width: 200px;
+	height: 23px;
+	margin-left: 10px;
+}
+
+.serving-button{
+	height: 23px;
+}
+
+#serve{
+	width: 10px;
+	height: 10px;
+	-webkit-border-radius: 25px;
+	-moz-border-radius: 25px;
+	border-radius: 25px;
+	background: yellow;
+	
+}
+
+.servePlayer1{
+	position : absolute;
+	top: 7px;
+	right : 330px;
+}
+
+.servePlayer2{
+	position : absolute;
+	top: 39px;
+	right : 330px;
+}
