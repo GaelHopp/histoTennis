@@ -25,7 +25,7 @@ angular.module('histoTennisApp')
 
     matchService.getPlayers().then(function(values){
 
-        $scope.players = values;
+        $scope.players = values; 
 
       }
     	);
