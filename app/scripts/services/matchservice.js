@@ -358,6 +358,54 @@ this.saveMatch = function(match){
       
     };
 
+    this.updateMatchLive = function(match){
+      return remoteService.post('/matchLive/update', match).then(function(values){
+        
+        return remoteService.get('/matchesLive').then(function(datas){
+          
+          var matches = datas.data;
+  
+
+        return matches;
+
+
+      });
+
+      });
+      
+    };
+
+
+    this.deleteMatchLive = function(idMatchLive){
+     
+      return remoteService.post('/delete/matchLive/'+idMatchLive, null).then(function(values){
+        
+        return remoteService.get('/matchesLive').then(function(datas){
+          
+          var matches = datas.data;
+  
+
+        return matches;
+
+
+      });
+
+      });
+      
+    };
+
+    this.refreshMatchesLive = function(){
+      return remoteService.get('/matchesLive').then(function(datas){
+          
+          var matches = datas.data;
+  
+
+        return matches;
+
+
+      });
+    };
+
 
     this.getMatchesLive = function(){
       return $q.all(promises).then(function(values){

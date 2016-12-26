@@ -62,7 +62,7 @@ angular.module('histoTennisApp')
 
     	console.log($scope.matchToSave.dateMatch);
 
-    }
+    };
 
 
 
@@ -110,7 +110,7 @@ angular.module('histoTennisApp')
 			$scope.set2TB = false;
 		}
 
-		if(pointsPlayer1 != "" && pointsPlayer2 != ""){
+		if(pointsPlayer1 !== "" && pointsPlayer2 !== ""){
 			if(isNaN(pointsPlayer1) === false && isNaN(pointsPlayer2) === false){
 				var pointsPlayer1Number = parseInt(pointsPlayer1);
 				var pointsPlayer2Number = parseInt(pointsPlayer2);
@@ -177,7 +177,7 @@ angular.module('histoTennisApp')
 
 		$scope.set3TB = false;
 
-		if(pointsPlayer1 != "" && pointsPlayer2 != ""){
+		if(pointsPlayer1 !== "" && pointsPlayer2 !== ""){
 			if(isNaN(pointsPlayer1) === false && isNaN(pointsPlayer2) === false){
 				var pointsPlayer1Number = parseInt(pointsPlayer1);
 				var pointsPlayer2Number = parseInt(pointsPlayer2);
@@ -237,7 +237,7 @@ angular.module('histoTennisApp')
 		var correct = false;
 
 
-		if(pointsPlayer1 != "" && pointsPlayer2 != ""){
+		if(pointsPlayer1 !== "" && pointsPlayer2 !== ""){
 			if(isNaN(pointsPlayer1) === false && isNaN(pointsPlayer2) === false){
 				var pointsPlayer1Number = parseInt(pointsPlayer1);
 				var pointsPlayer2Number = parseInt(pointsPlayer2);
@@ -342,7 +342,7 @@ angular.module('histoTennisApp')
 				tieBreakLoserPointsSet2 = pointsSet2Player1TB;
 			}
 
-			if(pointsSet3Player1 != null){
+			if(pointsSet3Player1 !== null){
 
 				if(pointsSet3Player1 === 7 && pointsSet3Player2 === 6){
 					tieBreakLoserPointsSet3 = pointsSet3Player2TB;
@@ -370,7 +370,7 @@ angular.module('histoTennisApp')
 					}
 				];
 
-				if(pointsSet3Player1 != null){
+				if(pointsSet3Player1 !== null){
 					var isSTB = 0;
 					if(pointsSet3Player1 > 9 || pointsSet3Player2 > 9){
 						isSTB = 1;
@@ -403,7 +403,7 @@ angular.module('histoTennisApp')
 					}
 				];
 
-				if(pointsSet3Player1 != null){
+				if(pointsSet3Player1 !== null){
 					var isSTB = 0;
 					if(pointsSet3Player1 > 9 || pointsSet3Player2 > 9){
 						isSTB = 1;
@@ -438,35 +438,35 @@ angular.module('histoTennisApp')
 		var pointsSet2Player1 = parseInt($scope.pointsSet2Player1);
 		var pointsSet2Player2 = parseInt($scope.pointsSet2Player2);
 
-		if($scope.pointsSet1Player1TB != "" && isNaN($scope.pointsSet1Player1TB) === false){
+		if($scope.pointsSet1Player1TB !== "" && isNaN($scope.pointsSet1Player1TB) === false){
 			pointsSet1Player1TB = parseInt($scope.pointsSet1Player1TB);
 		}
 
-		if($scope.pointsSet1Player2TB != "" && isNaN($scope.pointsSet1Player2TB) === false){
+		if($scope.pointsSet1Player2TB !== "" && isNaN($scope.pointsSet1Player2TB) === false){
 			pointsSet1Player2TB = parseInt($scope.pointsSet1Player2TB);
 		}
 
-		if($scope.pointsSet2Player1TB != "" && isNaN($scope.pointsSet2Player1TB) === false){
+		if($scope.pointsSet2Player1TB !== "" && isNaN($scope.pointsSet2Player1TB) === false){
 			pointsSet2Player1TB = parseInt($scope.pointsSet2Player1TB);
 		}
 
-		if($scope.pointsSet2Player2TB != "" && isNaN($scope.pointsSet2Player2TB) === false){
+		if($scope.pointsSet2Player2TB !== "" && isNaN($scope.pointsSet2Player2TB) === false){
 			pointsSet2Player2TB = parseInt($scope.pointsSet2Player2TB);
 		}
 
-		if($scope.pointsSet3Player1 != "" && isNaN($scope.pointsSet3Player1) === false){
+		if($scope.pointsSet3Player1 !== "" && isNaN($scope.pointsSet3Player1) === false){
 			pointsSet3Player1 = parseInt($scope.pointsSet3Player1);
 		}
 
-		if($scope.pointsSet3Player2 != "" && isNaN($scope.pointsSet3Player2) === false){
+		if($scope.pointsSet3Player2 !== "" && isNaN($scope.pointsSet3Player2) === false){
 			pointsSet3Player2 = parseInt($scope.pointsSet3Player2);
 		}
 
-		if($scope.pointsSet3Player1TB != "" && isNaN($scope.pointsSet3Player1TB) === false){
+		if($scope.pointsSet3Player1TB !== "" && isNaN($scope.pointsSet3Player1TB) === false){
 			pointsSet3Player1TB = parseInt($scope.pointsSet3Player1TB);
 		}
 
-		if($scope.pointsSet3Player2TB != "" && isNaN($scope.pointsSet3Player2TB) === false){
+		if($scope.pointsSet3Player2TB !== "" && isNaN($scope.pointsSet3Player2TB) === false){
 			pointsSet3Player2TB = parseInt($scope.pointsSet3Player2TB);
 		}
 

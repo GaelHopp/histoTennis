@@ -13,8 +13,8 @@
 }
 
 #serve{
-	width: 10px;
-	height: 10px;
+	width: 15px;
+	height: 15px;
 	-webkit-border-radius: 25px;
 	-moz-border-radius: 25px;
 	border-radius: 25px;
@@ -32,4 +32,27 @@
 	position : absolute;
 	top: 39px;
 	right : 330px;
+}
+
+.button-delete{
+	width: 50px;
+	margin-left: 5px;
+	font-size: 2.3em;
+}
+
+.score-player1{
+	position: absolute;
+	width: 200px;
+	margin-left: 500px;
+	margin-top: -36px;
+	font-size: 2.3em;
+}
+
+
+.score-player2{
+	position: absolute;
+	width: 200px;
+	margin-left: 500px;
+	margin-top: -36px;
+	font-size: 2.3em;
 }

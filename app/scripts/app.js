@@ -26,6 +26,8 @@ angular
     $httpProvider.defaults.headers.post = {};
     $httpProvider.defaults.headers.put = {};
     $httpProvider.defaults.headers.get = {};
+    $httpProvider.defaults.headers.delete = {};
+    $httpProvider.defaults.headers.options = {};
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',

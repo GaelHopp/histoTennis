@@ -22,6 +22,10 @@ this.post = function(url, data){
   return $http.post(domain+url, data);
 };
 
+this.delete = function(url){
+  return $http.delete(domain+url);
+};
+
 
 
 
