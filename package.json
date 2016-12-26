@@ -27,10 +27,8 @@
     "grunt-wiredep": "^2.0.0",
     "jit-grunt": "^0.9.1",
     "time-grunt": "^1.0.0",
-    "jshint-stylish": "^1.0.0",
-    "scripts": {
-  "start": "node app.js"
-}
+    "jshint-stylish": "^1.0.0"
+
   },
   "engines": {
     "node": ">=0.10.0"
@@ -38,4 +36,7 @@
   "dependencies": {
     "chart.js": "^2.2.1"
   },
+  "scripts": {
+  "start": "node app.js"
+}
 }
