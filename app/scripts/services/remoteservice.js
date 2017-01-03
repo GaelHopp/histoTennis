@@ -11,7 +11,7 @@ angular.module('histoTennisApp')
   .service('remoteService', function ($http) {
     // AngularJS will instantiate a singleton by calling "new" on this function
 
-var domain = 'http://histotennisback.herokuapp.com/api/';
+var domain = 'http://histotennisback.herokuapp.com/api';
 
 
 this.get = function(url){

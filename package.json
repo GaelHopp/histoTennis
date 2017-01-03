@@ -31,10 +31,11 @@
     "time-grunt": "^1.0.0"
   },
   "engines": {
-    "node": ">=0.10.0"
+    "node": "0.12.0"
   },
   "dependencies": {
-    "chart.js": "^2.2.1"
+    "chart.js": "^2.2.1",
+    "express": "^4.12.0"
   },
   "scripts": {
   "start": "node app.js" 
