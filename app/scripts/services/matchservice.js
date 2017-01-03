@@ -10,7 +10,7 @@
 angular.module('histoTennisApp')
   .service('matchService', function ($q, remoteService, statsService) {
    
-  	let promises = {
+  	var promises = {
   		matches : remoteService.get('/matches'),
   		players : remoteService.get('/players'),
       matchesLive : remoteService.get('/matchesLive')
