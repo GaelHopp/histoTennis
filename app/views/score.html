@@ -37,13 +37,13 @@
 	<div class="player">
 		<div ng-show="match.player1Serving == 1" id="serve" class="servePlayer1"></div>
 		<div class="name">{{match.player1}}</div>
-		<div class="score-player1 btn-group" role="group" aria-label="">
+		<div ng-show="hasAccess" class="score-player1 btn-group" role="group" aria-label="">
 		  <button ng-click="player1Plus(match)" type="button" class="btn btn-default">+</button>
 		  <button ng-show="player1CanMoins(match)" ng-click="player1Moins(match)" type="button" class="score-moins btn btn-default">-</button>
 		</div>
 		<div ng-show="match.player1Serving == 0" id="serve" class="servePlayer2"></div>
 		<div class="name">{{match.player2}}</div>
-		<div class="score-player2 btn-group" role="group" aria-label="">
+		<div ng-show="hasAccess" class="score-player2 btn-group" role="group" aria-label="">
 		  <button ng-click="player2Plus(match)" type="button" class="btn btn-default">+</button>
 		  <button ng-show="player2CanMoins(match)" ng-click="player2Moins(match)" type="button" class="score-moins btn btn-default">-</button>
 		</div>
@@ -71,7 +71,7 @@
 		</div>
 
 	</div>
-	<div class="button-delete">
+	<div ng-show="hasAccess" class="button-delete">
 		<button ng-click="deleteMatchLive(match.idMatchLive)" type="button" class="btn btn-default btn-save"><span class="glyphicon glyphicon-remove"></span></button>
 	</div>
 
